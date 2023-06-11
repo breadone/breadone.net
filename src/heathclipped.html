@@ -4,9 +4,8 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>@breadone:heathclipped</title>
+
     
-    <!-- <script type="text/javascript" src="getHeathcliff.js"></script> -->
-    <!-- <script defer src="../script/getHeathcliff.ts"></script> -->
     
     <link rel="stylesheet" href="style/style.css">
     <link rel="stylesheet" href="style/prism.css">
@@ -22,23 +21,15 @@
     
 </head>
 
-<script>
-    async function getHeathcliff() {
-    // const comps = date.split("-")
-    // const year = comps[0]
-    // const month = comps[1]
-    // const day = comps[2]
-    let imageurl;
+<script defer>
     
-    await fetch("http://localhost:8001/heathcliff")
+    fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/")
     .then((res) => {
         return res.text()
-    }).then((AGAIN) => {
-        imageurl = console.log(AGAIN)
+    }).then((data) => {
+        const imageurl = data
+        document.getElementById("heathcliff").src=imageurl
     })
-
-    document.getElementById("heathcliff").src=imageurl
-}
 </script>
 
 <body>
@@ -59,11 +50,8 @@
     </header>
     
     <div id="content">
-        <button onclick="getHeathcliff()">gaming</button>
-
+        <h3 style="text-align: center;">Today's funny orange cat image!</h3>
         <img id="heathcliff" src="" alt="funny orange cat image">
-        <!-- <h2 style="text-align: center;">coming soon :3</h2> -->
-        
     </div>
 
     <footer>
