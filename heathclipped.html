@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>@breadone:heathclipped</title>
+    
+    <!-- <script type="text/javascript" src="getHeathcliff.js"></script> -->
+    
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="prism.css">
+    
+    <meta name="description" content="gaming">
+    <!-- <meta name="keywords" content="nyancrimew,maia arson crimew,android,switzerland,hacktivism,lucerne,developer,hacktivism"> -->
+    <meta property="og:title" content="breadone">
+    <meta property="og:description" content="gaming">
+    <meta property="og:url" content="https://old.breadone.xyz">
+    <meta property="og:site_name" content="breadone">
+    <meta name="article:author" content="emily :3">
+    <meta name="theme-color" content="#caa9ec">
+    <link rel="icon" type="image/png" href="favicon.ico">
+    
+</head>
+
+<body>
+    <header id="site_header">
+        <h1>breadone dot xyz</h1>
+        <nav>   
+            <span><a href="https://throwback.breadone.xyz">home</a></span>
+            <span>|</span>
+            
+            <span><a href="https://throwback.breadone.xyz/heathclipped" class="active">heathclipped</a></span>
+            <span>|</span>
+            
+            <span><a href="https://throwback.breadone.xyz/photography">photos</a></span>
+            <span>|</span>
+            
+            <span><a href="https://breadone.xyz">fancy new place</a></span>
+        </nav>
+    </header>
+    
+    <div id="content">
+        <button onclick="getHeathcliff('2023-01-01')">gaming</button>
+
+        <img id="heathcliff" src="" alt="funny orange cat image">
+        
+        
+    </div>
+
+    <footer>
+
+        <div class="footer-kitten"></div>
+        
+        <div>   
+            <span><a href="https://github.com/breadone/breadone.xyz" rel="noreferrer" target="_blank">source</a></span>
+            <span>|</span>
+            
+            <span><a href="mailto:1@breadone.xyz" rel="noreferrer" target="_blank">email</a></span>
+            <span>|</span>
+            
+            <span><a href="https://github.com/breadone" rel="noreferrer" target="_blank">github</a></span>
+            
+        </div>
+    </footer>  
+
+
+<script>
+    async function getHeathcliff(date) {
+        const comps = date.split("-")
+        const year = comps[0]
+        const month = comps[1]
+        const day = comps[2]
+        
+        const todayComps = new Date().toISOString().substring(0, 10).split("-")
+        
+        const html = (await (await fetch(`https://www.gocomics.com/heathcliff/${year}/${month}/${day}`)).text());
+        
+        if (!html.includes("data-image")) {
+            // if the new comic just hasnt been posted today (or isnt available for some reason), just go back to the previous day
+            if (todayComps[2] == day) {
+                redirect(`/heathcliff/${year}-${month}-${Number(day) - 1}`)
+            } else { // or, if the user went to some date in the future, redirect to today
+                redirect(`/heathcliff/${todayComps.join("-")}`)
+            }
+            
+        }
+        
+        const urlStart = html.indexOf("data-image") + 12
+        const imageurl = html.slice(urlStart).split("\"")[0]
+        
+        console.log(imageurl);
+        
+        document.getElementById("heathcliff").src=imageurl
+    }
+</script>
+    
+</body>
+
+</html>

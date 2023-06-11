@@ -2,34 +2,34 @@ html{
     color:#5c357c;
     background-color:#caa9ec
 }
- a{
+a{
     color:#9000ff
 }
 .like-a{
     color:#ff008c;
     text-decoration:underline
 }
- a.active{
+a.active{
     color:#c300ff
 }
- #site_header{
+#site_header{
     border-bottom:1px solid #e100ff;
     padding-bottom:5px
 }
- footer{
+footer{
     padding-top:5px;
     border-top:1px solid #e100ff;
 }
- img{
+img{
     height:88px
 }
- footer,#site_header{
+footer,#site_header{
     text-align:center
 }
- h2{
+h2{
     margin-bottom:0
 }
- #content{
+#content{
     max-width:900px;
     margin-left:auto;
     margin-right:auto;
@@ -43,7 +43,7 @@ html{
     content:"·";
     display:inline-block
 }
- time,.author,.updated{
+time,.author,.updated{
     font-weight:700
 }
 .article_header,.page_header{
@@ -58,4 +58,11 @@ img{
 }
 .tag{
     font-weight:700
+}
+
+#heathcliff {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    
 }
