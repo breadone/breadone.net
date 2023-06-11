@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <title>@breadone:heathclipped</title>
+    
+    <!-- <script type="text/javascript" src="getHeathcliff.js"></script> -->
+    <!-- <script defer src="../script/getHeathcliff.ts"></script> -->
+    
+    <link rel="stylesheet" href="style/style.css">
+    <link rel="stylesheet" href="style/prism.css">
+    
+    <meta name="description" content="gaming">
+    <meta property="og:title" content="breadone">
+    <meta property="og:description" content="gaming">
+    <meta property="og:url" content="https://breadone.xyz">
+    <meta property="og:site_name" content="breadone">
+    <meta name="article:author" content="emily :3">
+    <meta name="theme-color" content="#caa9ec">
+    <link rel="icon" type="image/png" href="../public/favicon.ico">
+    
+</head>
+
+<script>
+    async function getHeathcliff() {
+    // const comps = date.split("-")
+    // const year = comps[0]
+    // const month = comps[1]
+    // const day = comps[2]
+    
+    const todayComps = new Date().toISOString().substring(0, 10).split("-")
+    
+    // const html = (await (await fetch(`https://www.gocomics.com/heathcliff/${todayComps.join("/")}`)).text());
+    const html2 = (await (await fetch("https://www.creators.com/read/heathcliff")).text());
+    
+    if (!html.includes("data-image")) {
+        // if (todayComps[2] == day) {
+        //     // redirect(`/heathcliff/${year}-${month}-${Number(day) - 1}`)
+        // } else {
+        //     // redirect(`/heathcliff/${todayComps.join("-")}`)
+        // }
+        
+    }
+    
+    const urlStart = html.indexOf("data-image") + 12
+    const imageurl = html.slice(urlStart).split("\"")[0]
+    
+    console.log(imageurl);
+
+    document.getElementById("heathcliff").src=imageurl
+}
+</script>
+
+<body>
+    <header id="site_header">
+        <h1>breadone dot xyz</h1>
+        <nav>   
+            <span><a href="https://breadone.xyz">home</a></span>
+            <span>|</span>
+            
+            <span><a href="https://breadone.xyz/heathclipped.html" class="active">heathclipped</a></span>
+            <span>|</span>
+            
+            <span><a href="https://breadone.xyz/photography.html">photos</a></span>
+            <!-- <span>|</span> -->
+            
+            <!-- <span><a href="https://breadone.xyz">fancy new place</a></span> -->
+        </nav>
+    </header>
+    
+    <div id="content">
+        <button onclick="getHeathcliff()">gaming</button>
+
+        <img id="heathcliff" src="" alt="funny orange cat image">
+        <!-- <h2 style="text-align: center;">coming soon :3</h2> -->
+        
+    </div>
+
+    <footer>
+        
+        <div>   
+            <span><a href="https://github.com/breadone/breadone.xyz" rel="noreferrer" target="_blank">source</a></span>
+            <span>|</span>
+            
+            <span><a href="mailto:1@breadone.xyz" rel="noreferrer" target="_blank">email</a></span>
+            <span>|</span>
+            
+            <span><a href="https://github.com/breadone" rel="noreferrer" target="_blank">github</a></span>
+            
+        </div>
+    </footer>  
+
+    
+</body>
+
+</html>
