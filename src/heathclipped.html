@@ -31,8 +31,7 @@
     
     const todayComps = new Date().toISOString().substring(0, 10).split("-")
     
-    // const html = (await (await fetch(`https://www.gocomics.com/heathcliff/${todayComps.join("/")}`)).text());
-    const html2 = (await (await fetch("https://www.creators.com/read/heathcliff")).text());
+    const html = (await (await fetch(`https://www.gocomics.com/heathcliff/${todayComps.join("/")}`)).text());
     
     if (!html.includes("data-image")) {
         // if (todayComps[2] == day) {
@@ -56,13 +55,13 @@
     <header id="site_header">
         <h1>breadone dot xyz</h1>
         <nav>   
-            <span><a href="https://breadone.xyz">home</a></span>
+            <span><a href="index.html">home</a></span>
             <span>|</span>
             
-            <span><a href="https://breadone.xyz/heathclipped.html" class="active">heathclipped</a></span>
+            <span><a href="heathclipped.html" class="active">heathclipped</a></span>
             <span>|</span>
             
-            <span><a href="https://breadone.xyz/photography.html">photos</a></span>
+            <span><a href="photography.html">photos</a></span>
             <!-- <span>|</span> -->
             
             <!-- <span><a href="https://breadone.xyz">fancy new place</a></span> -->
