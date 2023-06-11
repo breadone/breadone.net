@@ -6,6 +6,7 @@
     <title>@breadone:heathclipped</title>
     
     <!-- <script type="text/javascript" src="getHeathcliff.js"></script> -->
+    <script defer src="getHeathcliff.js"></script>
     
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="prism.css">
@@ -29,10 +30,10 @@
             <span><a href="https://throwback.breadone.xyz">home</a></span>
             <span>|</span>
             
-            <span><a href="https://throwback.breadone.xyz/heathclipped" class="active">heathclipped</a></span>
+            <span><a href="https://throwback.breadone.xyz/heathclipped.html" class="active">heathclipped</a></span>
             <span>|</span>
             
-            <span><a href="https://throwback.breadone.xyz/photography">photos</a></span>
+            <span><a href="https://throwback.breadone.xyz/photography.html">photos</a></span>
             <span>|</span>
             
             <span><a href="https://breadone.xyz">fancy new place</a></span>
@@ -63,36 +64,6 @@
         </div>
     </footer>  
 
-
-<script>
-    async function getHeathcliff(date) {
-        const comps = date.split("-")
-        const year = comps[0]
-        const month = comps[1]
-        const day = comps[2]
-        
-        const todayComps = new Date().toISOString().substring(0, 10).split("-")
-        
-        const html = (await (await fetch(`https://www.gocomics.com/heathcliff/${year}/${month}/${day}`)).text());
-        
-        if (!html.includes("data-image")) {
-            // if the new comic just hasnt been posted today (or isnt available for some reason), just go back to the previous day
-            if (todayComps[2] == day) {
-                redirect(`/heathcliff/${year}-${month}-${Number(day) - 1}`)
-            } else { // or, if the user went to some date in the future, redirect to today
-                redirect(`/heathcliff/${todayComps.join("-")}`)
-            }
-            
-        }
-        
-        const urlStart = html.indexOf("data-image") + 12
-        const imageurl = html.slice(urlStart).split("\"")[0]
-        
-        console.log(imageurl);
-        
-        document.getElementById("heathcliff").src=imageurl
-    }
-</script>
     
 </body>
 
