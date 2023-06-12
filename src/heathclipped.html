@@ -22,7 +22,16 @@
 </head>
 
 <script defer>
-    fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/")
+    const today = new Date().toISOString().substring(0, 10).split("-").join("/")
+
+    fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/",
+        {
+            headers: {
+                "date": today
+            }
+        }
+    
+    )
     .then((res) => {
         return res.text()
     }).then((data) => {
@@ -49,8 +58,8 @@
     </header>
     
     <div id="content">
-        <h3 style="text-align: center;">Today's funny orange cat image!</h3>
-        <img id="heathcliff" src="" alt="funny orange cat image">
+        <h3 style="text-align: center;">today's funny orange cat image!</h3>
+        <img id="heathcliff" src="">
     </div>
 
     <footer>
