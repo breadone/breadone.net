@@ -5,10 +5,6 @@ html{
 a{
     color:#9000ff
 }
-.like-a{
-    color:#ff008c;
-    text-decoration:underline
-}
 a.active{
     color:#c300ff
 }
@@ -17,11 +13,10 @@ a.active{
     padding-bottom:5px;
     text-align:center;
 }
+
 footer{
     padding-top:5px;
     border-top:1px solid #e100ff;
-}
-footer {
     text-align:center
 }
 
@@ -39,9 +34,6 @@ time,.author,.updated{
 .article_header,.page_header{
     border-bottom:1px dotted #db67a7;
     padding-bottom:4px
-}
-.article_header>h1,.page_header>h1{
-    margin:.1rem
 }
 
 .tag{
