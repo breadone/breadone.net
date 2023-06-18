@@ -19,6 +19,24 @@
     
 </head>
 
+<style>
+    .photos-grid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 100;
+    }
+
+    .photos-grid-item {
+        max-width: 100%;
+        width: 95%;
+        height: auto;
+        /* border: 1px solid rgba(225, 0, 255, 0.2); */
+        padding: 5pt;
+        align-self: center;
+        text-align: center;
+    }
+</style>
+
 <body>
     <header id="site_header">
         <h1>breadone dot xyz</h1>
@@ -30,14 +48,27 @@
             <span>|</span>
             
             <span><a href="photography.html" class="active">photos</a></span>
-            <!-- <span>|</span> -->
-            
-            <!-- <span><a href="https://breadone.xyz">fancy new place</a></span> -->
         </nav>
     </header>
     
     <div id="content">
-        <h2 style="text-align: center;">coming soon :3</h2>
+        <h3 style="display: block; text-align: center;">photos!</h3>
+
+        <div class="center_80pct">
+            <p>if you want any of these as prints, chuck me an email and i'll see what i can do!</p>
+            <p>some of these are cropped btw so they may be bigger in the end</p>
+            <div class="photos-grid">
+                <img class="photos-grid-item" src="../res/photos/1.png"/>
+                <img class="photos-grid-item" src="../res/photos/4.png"/>
+                <img class="photos-grid-item" src="../res/photos/5.png"/>
+                <img class="photos-grid-item" src="../res/photos/6.png"/>
+                <img class="photos-grid-item" src="../res/photos/8.png"/>
+                <img class="photos-grid-item" src="../res/photos/9.png"/>
+                <img class="photos-grid-item" src="../res/photos/10.png"/>
+                <img class="photos-grid-item" src="../res/photos/3.png"/>
+                <img class="photos-grid-item" src="../res/photos/11.png"/>
+            </div>
+        </div>
     </div>
 
     <footer>
