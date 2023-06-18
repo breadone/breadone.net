@@ -14,21 +14,17 @@ a.active{
 }
 #site_header{
     border-bottom:1px solid #e100ff;
-    padding-bottom:5px
+    padding-bottom:5px;
+    text-align:center;
 }
 footer{
     padding-top:5px;
     border-top:1px solid #e100ff;
 }
-img{
-    height:88px
-}
-footer,#site_header{
+footer {
     text-align:center
 }
-h2{
-    margin-bottom:0
-}
+
 #content{
     max-width:900px;
     margin-left:auto;
@@ -36,13 +32,7 @@ h2{
     padding-top:2em;
     padding-bottom:2em
 }
-.byline{
-    font-size:.75rem
-}
-.middot:after{
-    content:"·";
-    display:inline-block
-}
+
 time,.author,.updated{
     font-weight:700
 }
@@ -53,9 +43,7 @@ time,.author,.updated{
 .article_header>h1,.page_header>h1{
     margin:.1rem
 }
-img{
-    max-width:75%
-}
+
 .tag{
     font-weight:700
 }
