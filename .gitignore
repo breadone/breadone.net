@@ -1,4 +1,4 @@
 node_modules
 build
 .DS_Store
-res/photos
+res/photos/*.png
