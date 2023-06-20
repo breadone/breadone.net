@@ -22,16 +22,8 @@
 </head>
 
 <script defer>
-    const today = new Date().toISOString().substring(0, 10).split("-").join("/")
 
-    fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/",
-        {
-            headers: {
-                "date": today
-            }
-        }
-    
-    )
+    fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/")
     .then((res) => {
         return res.text()
     }).then((data) => {
