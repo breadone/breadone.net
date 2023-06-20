@@ -1,11 +1,17 @@
 from urllib import request as req
 import base64
 
+# hosted on aws lambda
+
 def lambda_handler(event, context):
     # check is date has been passed in the event, else use today
+    print("EVT", event)
     if ('body' in event):
         b64date = event['body']
-        date = base64.b64decode(b64date).decode("utf8")
+        try:
+            date = base64.b64decode(b64date).decode("utf8")
+        except:
+            date = event['body']
         print("sanity check:", date, type(date))
         return comicWithDate(date)
 
@@ -15,12 +21,10 @@ def lambda_handler(event, context):
     urlStart = html.index('https://cdn.alphacomedy.com')
     imageUrl = html[urlStart:].split("\"")[0]
 
-    response = {
+    return {
         'statusCode': 200,
         'body': imageUrl
     }
-    
-    return response
 
 
 # date is a string, formatted as %Y/%m/%d
@@ -50,9 +54,7 @@ def comicWithDate(date):
             'body': notFoundURL
         }
     
-    response = {
+    return {
         'statusCode': 200,
         'body': imageUrl
     }
-    
-    return response

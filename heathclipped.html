@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
     <meta charset="utf-8">
     <title>@breadone:heathclipped</title>
-
+    
     
     
     <link rel="stylesheet" href="style/style.css">
@@ -22,7 +22,9 @@
 </head>
 
 <script defer>
-
+    
+    // document.querySelector("#hcDateSelector").value = datestring
+    
     fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/")
     .then((res) => {
         return res.text()
@@ -30,6 +32,28 @@
         const imageurl = data
         document.getElementById("heathcliff").src=imageurl
     })
+</script>
+
+<script>
+    function getHeathcliffForDate() {
+        const comicDate = document.querySelector("#comicDate")
+        const comicDateFormatted = comicDate.value.split("-").join("/")
+        
+        const options = {
+            method: 'POST',
+            // headers: {'Content-Type': 'application/text'},
+            body: '2023/01/01'
+        };
+        
+        fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/", options)
+        .then(response => response.text())
+        .then(response => {
+            console.log(response);
+            document.getElementById("heathcliff").src=response
+        })
+        .catch(err => console.error(err));
+        
+    }
 </script>
 
 <body>
@@ -50,11 +74,18 @@
     </header>
     
     <div id="content" style="padding-top: 0px">
-        <h3 style="text-align: center;">today's funny orange cat image!</h3>
-        <!-- <h5 style="text-align: center;">yeah its not quite working all the time im working on it</h5> -->
-        <img id="heathcliff" src="">
-    </div>
+        <h3 style="text-align: center;">funny orange cat images!</h3>
 
+        <img id="heathcliff" src="">
+        
+        <div style="display: flex; justify-content: center; padding-top: 15px;">
+            <!-- <form> -->
+                <input id="comicDate" name="comicDate" type="date">
+                <button onclick="getHeathcliffForDate()" style="padding-left: 5px;">go!</button>
+            <!-- </form> -->
+        </div>
+    </div>
+    
     <footer>
         
         <div>   
@@ -68,7 +99,7 @@
             
         </div>
     </footer>  
-
+    
     
 </body>
 
