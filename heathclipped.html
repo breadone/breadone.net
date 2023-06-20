@@ -42,7 +42,7 @@
         const options = {
             method: 'POST',
             // headers: {'Content-Type': 'application/text'},
-            body: '2023/01/01'
+            body: comicDateFormatted
         };
         
         fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/", options)
@@ -76,14 +76,15 @@
     <div id="content" style="padding-top: 0px">
         <h3 style="text-align: center;">funny orange cat images!</h3>
 
-        <img id="heathcliff" src="">
         
-        <div style="display: flex; justify-content: center; padding-top: 15px;">
+        
+        <div style="display: flex; justify-content: center; padding-bottom: 15px;">
             <!-- <form> -->
                 <input id="comicDate" name="comicDate" type="date">
                 <button onclick="getHeathcliffForDate()" style="padding-left: 5px;">go!</button>
             <!-- </form> -->
         </div>
+        <img id="heathcliff" src="">
     </div>
     
     <footer>
