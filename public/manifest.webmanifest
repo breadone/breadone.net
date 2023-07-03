@@ -1,0 +1,10 @@
+{
+	"name": "breadone.xyz",
+	"short_name": "breadone",
+	"description": "juniper's website!",
+	
+	"start_url": "/",
+	"background_color": "#1d1f21",
+	"theme_color": "#2bbc8a",
+	"display": "standalone"
+}

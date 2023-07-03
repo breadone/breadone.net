@@ -1,0 +1,33 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base";
+
+const allPhotos = await getCollection("photo");
+
+const meta = {
+	title: "photography",
+	description: "i take the photos,,",
+};
+---
+
+<PageLayout meta={meta}>
+	<h1 class="title">photos!</h1>
+	<p class="mb-6">if you want any of these as prints, chuck me an email and i'll see what i can do!</p>
+	<div class="">
+			<ul class="space-y-8 text-start">
+			{
+				allPhotos.map(photo => (
+					<li>
+					<div class="flex">
+						<img alt={photo.data.title} src={photo.data.src} style="max-width: 60%"/>	
+						<div class="px-4">
+							<b>{photo.data.title}</b> <br><br>
+							📌 {photo.data.location}
+						</div>
+					</div>
+					</li>
+				))
+			}
+			</ul>
+	</div>
+</PageLayout>

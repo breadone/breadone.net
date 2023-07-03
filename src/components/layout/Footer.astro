@@ -1,0 +1,38 @@
+---
+// import { MENU_LINKS } from "@/data/constants";
+
+const links = [
+	{
+		title: "email",
+		path: "mailto:bohrium_sugars_0g@icloud.com",
+	},
+	{
+		title: "github",
+		path: "https://github.com/breadone",
+	},
+	{
+		title: "throwback",
+		path: "/throwback"
+	}
+];
+---
+
+<footer
+	class="mt-auto flex w-full flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top text-gray-500 sm:flex-row sm:justify-between sm:text-xs"
+>
+	<nav
+		aria-label="Contact links"
+		class="flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500"
+	>
+		{
+			links.map((link) => (
+				<a
+					href={link.path}
+					class="px-4 py-2 sm:px-2 sm:py-0 sm:hover:text-textColor sm:hover:underline"
+				>
+					{link.title}
+				</a>
+			))
+		}
+	</nav>
+</footer>

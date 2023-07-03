@@ -1,0 +1,49 @@
+---
+import SiteLayout  from '@/layouts/ThrowbackLayout'
+---
+
+
+<SiteLayout title="photography">
+    <h3 style="display: block; text-align: center;">photos!</h3>
+
+        <div class="center_80pct">
+            <p>if you want any of these as prints, chuck me an email and i'll see what i can do!</p>
+            <p>some of these are cropped btw so they may be bigger in the end</p>
+            <div class="photos-grid">
+                <a href="/photos/1.png">   <img class="photos-grid-item" src="/photos/boat-on-fjord.png" alt="Boat on the Fjord"/>           </a>
+                <a href="/photos/4.png">   <img class="photos-grid-item" src="/photos/dolphin-in-the-distance.png" alt="Dolphin by the Mountain"/>     </a>
+                <a href="/photos/5.png">   <img class="photos-grid-item" src="/photos/mt-cook-in-the-distance.png" alt="Mountain behind the River"/>   </a>
+                <a href="/photos/6.png">   <img class="photos-grid-item" src="/photos/village-in-the-shadow.png" alt="Mountain in the Distance"/>    </a>
+                <a href="/photos/8.png">   <img class="photos-grid-item" src="/photos/wellington-streaks.png" alt="Wellingon Streets"/>           </a>
+                <a href="/photos/9.png">   <img class="photos-grid-item" src="/photos/statue.png" alt="Statue in the Sun"/>           </a>
+                <a href="/photos/10.png">  <img class="photos-grid-item" src="/photos/lightbulb.png" alt="Lightbulb behind a Fence"/>   </a>
+                <a href="/photos/3.png">   <img class="photos-grid-item" src="/photos/crescent-moon.png" alt="Thin Crescent Moon"/>          </a>
+                <a href="/photos/11.png">  <img class="photos-grid-item" src="/photos/boat-on-shore.png" alt="Boat Hidden on the Shore"/>   </a>
+            </div>
+        </div>
+</SiteLayout>
+
+<style>
+    
+    .center_80pct {
+        text-align: center;
+        max-width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .photos-grid {
+        display: grid;
+        grid-template-columns: auto auto auto;
+        gap: 100;
+    }
+
+    .photos-grid-item {
+        max-width: 100%;
+        width: 95%;
+        height: auto;
+        /* border: 1px solid rgba(225, 0, 255, 0.2); */
+        padding: 5pt;
+        align-self: center;
+        text-align: center;
+    }
+</style>

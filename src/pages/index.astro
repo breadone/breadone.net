@@ -1,0 +1,114 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base";
+import PostPreview from "@/components/blog/PostPreview";
+import { sortMDByDate } from "@/utils";
+
+const MAX_POSTS = 10;
+const allPosts = await getCollection("post");
+const allPostsByDate = sortMDByDate(allPosts).slice(0, MAX_POSTS);
+---
+
+<PageLayout meta={{ title: "" }}>
+	<section>
+		<!-- <h1 class="title mb-6">hi</h1> -->
+		<div class="mb-4">
+			<p>
+				hi! welcome to this (still very much work in progress) lil web site!
+			</p><br>
+			<p>
+				this place started as a very very simple little thing that i made on a whim, but as i learned more and wanted to do more here, i eventually caved and made An Proper Website.
+				you can still visit <a class="cactus-link" href="/throwback">the old place</a> tho! 
+			</p><br>
+			<p>
+				i've tried my best to stick with what i set out to do with the original project,
+				which basically boiled down to not make this place too boring. 
+			</p><br>
+			<p>
+				but yeah, i've been uploading more photos to here, as well as trying to write a little,
+				as a treat, whenever i have ideas. ill certainly keep updating this place whenever i can too!
+			</p>
+		</p>
+	</section>
+	<section aria-label="Recent Posts" class="mt-16">
+		<h2 class="title mb-4 text-xl">Recent Posts</h2>
+		<ul class="space-y-4 sm:space-y-2">
+			{
+				allPostsByDate.map((p) => (
+					<li class="flex flex-col gap-x-2 sm:flex-row">
+						<PostPreview post={p} />
+					</li>
+				))
+			}
+		</ul>
+	</section>
+	<!-- <section class="mt-16">
+		<h2 class="title mb-4 text-xl">Technologies</h2>
+		<ul class="space-y-4 sm:space-y-2">
+			<li>
+				<a
+					href="https://astro.build"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>Astro
+				</a>:
+				<p class="inline-block sm:mt-2">Build fast websites, faster.</p>
+			</li>
+			<li>
+				<a
+					href="https://docs.astro.build/en/guides/integrations-guide/image/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>@astro/image
+				</a>:
+				<p class="inline-block sm:mt-2">
+					An Astro integration for optimising images in Astro projects.
+				</p>
+			</li>
+			<li>
+				<a
+					href="https://tailwindcss.com"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>Tailwind CSS
+				</a>:
+				<p class="inline-block sm:mt-2">
+					Rapidly build modern websites without ever leaving your HTML.
+				</p>
+			</li>
+			<li>
+				<a
+					href="https://www.markdownguide.org/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>Markdown
+				</a>:
+				<p class="inline-block sm:mt-2">Simple and easy-to-use markup language.</p>
+			</li>
+			<li>
+				<a
+					href="https://mdxjs.com/"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>MDX
+				</a>:
+				<p class="inline-block sm:mt-2">Markdown for the component era.</p>
+			</li>
+			<li>
+				<a
+					href="https://github.com/vercel/satori"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="cactus-link inline-block"
+					>Satori
+				</a>:
+				<p class="inline-block sm:mt-2">Generating png Open Graph images for blog posts</p>
+			</li>
+		</ul>
+	</section> -->
+</PageLayout>
