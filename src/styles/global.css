@@ -21,6 +21,10 @@
 		--theme-accent-2: #eee;
 		--theme-quote: #ccffb6;
 		--theme-menu-bg: rgb(29 31 33 / 0.85);
+		
+		--header-title-d: #fbb6ce;
+		--header-title-o: #fff;
+		--header-title-t: #90cdf4;
 	}
 
 	html {
