@@ -14,7 +14,7 @@ interface SiteConfig {
 
 export const siteConfig: SiteConfig = {
 	// Used as both a meta property (src/components/BaseHead.astro L:31 + L:49) & the generated satori png (src/pages/og-image/[slug].png.ts)
-	author: "juniper!",
+	author: "juniper",
 	// Meta property used to construct the meta title property, found in src/components/BaseHead.astro L:11
 	title: "@breadone",
 	// Meta property used as a default description meta property
