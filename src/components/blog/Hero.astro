@@ -13,10 +13,11 @@ const postDate = getFormattedDate(content.data.publishDate, { month: "long" });
 ---
 
 <h1 class="title mb-3 sm:mb-1">{content.data.title}</h1>
-<time datetime={datetime}>{postDate}</time>
+<time datetime={datetime}>{postDate}</time> | 
+{content.data.wordCount.toLocaleString()} Words
 {
 	!!content.data.tags?.length && (
-		<div class="mt-1 sm:mt-0 sm:inline sm:before:mx-2 sm:before:content-['|']">
+		<div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
 			<svg
 				aria-hidden="true"
 				focusable="false"
