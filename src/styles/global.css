@@ -4,7 +4,7 @@
 	:root {
 		color-scheme: light;
 		--theme-bg: #fafafa;
-		--theme-link: #567c77;
+		--theme-link: #cc2a42;
 		--theme-text: #1d1f21;
 		--theme-accent: #cc2a42;
 		--theme-accent-2: #111;
@@ -15,9 +15,9 @@
 	:root.dark {
 		color-scheme: dark;
 		--theme-bg: #1d1f21;
-		--theme-link: #2accbf;
+		--theme-link: #b76de8;
 		--theme-text: #fafafa;
-		--theme-accent: #caa9ec;
+		--theme-accent: #b76de8;
 		--theme-accent-2: #eee;
 		--theme-quote: #ccffb6;
 		--theme-menu-bg: rgb(29 31 33 / 0.85);
