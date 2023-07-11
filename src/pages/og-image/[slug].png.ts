@@ -51,7 +51,7 @@ const markup = (title: string, pubDate: string) => html`<div
 				<path d="M6.5 10.5l1.5 3.5" />
 				<path d="M12.5 4.5l1.5 3.5" />
 			</svg>
-			<p tw="ml-3 font-semibold">breadone thoughts</p>
+			<p tw="ml-3 font-semibold">blogone</p>
 		</div>
 		<p>by ${siteConfig.author}</p>
 	</div>

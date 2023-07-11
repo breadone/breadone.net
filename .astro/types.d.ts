@@ -206,6 +206,13 @@ declare module 'astro:content' {
   collection: "post";
   data: InferEntrySchema<"post">
 } & { render(): Render[".md"] };
+"ninth-doctor-p1.md": {
+	id: "ninth-doctor-p1.md";
+  slug: "ninth-doctor-p1";
+  body: string;
+  collection: "post";
+  data: InferEntrySchema<"post">
+} & { render(): Render[".md"] };
 };
 
 	};
