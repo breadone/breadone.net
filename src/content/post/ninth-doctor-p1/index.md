@@ -2,7 +2,7 @@
 title: "The Ninth Doctor Era: Part One"
 description: "Episode 1: Rose"
 publishDate: "14 Jul 2023"
-wordCount: 586
+wordCount: 820
 tags: ["doctor-who", "ninth-doctor-era"]
 ---
 
@@ -13,8 +13,7 @@ But really, Doctor Who has been one of my favourite TV shows for basically as lo
 
 So here's a (hopefully, if I commit to it) series of posts on the first series of the Revived Era of Doctor Who!
 
-![Titlecard for the episode, ROSE by Russell T Davies (TS 00:38)](./rose-titlecard.png)
-<sup>Titlecard for the episode (00:38)</sup>
+<img style="margin: auto;" src="https://media.giphy.com/media/ERc1EaVfHOq4w/giphy.gif" alt="Tenth Doctor saying allons-y gif">
 
 ## Classic Who Recap
 To start with, you can't really appreciate the revival of Doctor Who without first looking at what made it die in the first place. 
@@ -43,7 +42,7 @@ The story ends with the Doctor and rose venturing to the Autons' and Nestene Con
 ![Rose kicks the Autons into the Nestene Consciousness (TS 38:29)](./rose-kick-auton.png)
 <sup>Rose kicks the Autons into the Nestene Consciousness (38:29)</sup>
 
-Perfectly serviceable. But like, this is the first one!! This was *the* beginning! Classic Who had a very different and frankly old vibe to it all, with slower stories, and obviously worse effects and CGI. The revival had an opportunity to modernise all of this, and it did it masterfully. The story is fast paced and has plenty of intrigue, specifically about the identity and especially the past of the Doctor.
+Perfectly serviceable to me. But like, this is the first one!! This was *the* beginning! Classic Who had a very different and frankly old vibe to it all, with slower stories, and obviously worse effects and CGI. The revival had an opportunity to modernise all of this, and it did it masterfully. The story is fast paced and has plenty of intrigue, specifically about the identity and especially the past of the Doctor.
 
 ## The (Brand New) Doctor
 One of the more challenging things for Davies to introduce was probably the Doctor himself. On the one hand, there are so many fans who knew all about him, and this was also of course plenty of people's first Who episode. How do you satisfy both of those camps?
@@ -53,3 +52,8 @@ Casting someone new for the role was obvious. The Eighth Doctor portrayed by Pau
 ![The Ninth Doctor in his TARDIS (TS 27:47)](./nine-in-tardis.png)
 <sup>The Ninth Doctor in his TARDIS (27:47)</sup>
 
+I won't lie, on my first watch as a child, I really was not a fan of Eccleston. My first doctor was Ten, and for eleven year old me, going back and watching Eccleston was jarring. Who was this man? This isn't the Doctor I know! I shamefully kept this opinion for quite a while, often skipping straight to series 2 whenever the mood to rewatch hit me. 
+
+Thankfully he did grow on me massively as I grew older, and these days Nine is just as well-loved as, say, Ten or Eleven.
+
+Through Rose's eyes, we first see him as a 
