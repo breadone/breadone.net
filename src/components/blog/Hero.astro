@@ -2,6 +2,12 @@
 import { getFormattedDate } from "@/utils";
 import type { CollectionEntry } from "astro:content";
 
+function calcReadTime(wordCount) {
+	let d = new Date()
+	d.setMinutes(wordCount/184);
+	return d.getMinutes().toLocaleString();
+}
+
 interface Props {
 	content: CollectionEntry<"post">;
 }
@@ -9,12 +15,14 @@ interface Props {
 const { content } = Astro.props;
 
 const datetime = content.data.publishDate.toISOString();
+const wordCount = content.data.wordCount;
+const readTime = calcReadTime(wordCount);
 const postDate = getFormattedDate(content.data.publishDate, { month: "long" });
 ---
 
 <h1 class="title mb-3 sm:mb-1">{content.data.title}</h1>
 <time datetime={datetime}>{postDate}</time> | 
-{content.data.wordCount.toLocaleString()} Words
+{readTime} min. read
 {
 	!!content.data.tags?.length && (
 		<div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
