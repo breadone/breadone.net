@@ -2,7 +2,7 @@
 title: "The Ninth Doctor Era: Part One"
 description: "Episode 1: Rose"
 publishDate: "14 Jul 2023"
-wordCount: 820
+wordCount: 954
 tags: ["doctor-who", "ninth-doctor-era"]
 ---
 
@@ -31,29 +31,35 @@ So now you can probably see the mammoth task that the showrunner, Russel T. Davi
 <sup>The Autons attacking Rose (05:23)</sup>
 
 ## The Story
-Looking at it from the perspective of a new fan in hindsight, the story in *Rose* is honestly not all that special or even particularly important. It's a *very* typical New Who story, complete with a pretty neat alien villain, and an actually great arc for Rose by the end.
+Looking at it from the perspective of a new fan in hindsight, the story in *Rose* is honestly not all that special or even particularly important. It's a *very* typical New Who story, complete with a pretty neat alien villain, and fantastic action and character sequences. Here's a very quick summary, the story really is not the focus of this episode:
 
-It follows the 19 year old Rose Tyler, and the normal life she once had being turned upside down once she meets the Doctor, who saves her when she's attacked by plastic window mannequins (known as Autons, curiously not mentioned by name in the episode) at the shop where she works.
+We follow the 19 year old Rose Tyler, and the normal life she once had being turned upside down once she meets the Doctor, who saves her when she's attacked by plastic window mannequins (known as Autons, curiously not mentioned by name in the episode) at the shop where she works.
 
 She then tries to find out more about the strange man who saved her life, while her boyfriend Mickey has been eaten (?) by the living plastic as well.
 
-The story ends with the Doctor and rose venturing to the Autons' and Nestene Consciousness' hideout underneath the London Eye, and some acrobatics from Rose saving the Doctor from Death by Vat of Plastic.
+The story ends with the Doctor and Rose venturing to the Autons' and Nestene Consciousness' hideout underneath the London Eye, and some acrobatics from Rose saving the Doctor from Death by Vat of Plastic.
 
 ![Rose kicks the Autons into the Nestene Consciousness (TS 38:29)](./rose-kick-auton.png)
 <sup>Rose kicks the Autons into the Nestene Consciousness (38:29)</sup>
 
 Perfectly serviceable to me. But like, this is the first one!! This was *the* beginning! Classic Who had a very different and frankly old vibe to it all, with slower stories, and obviously worse effects and CGI. The revival had an opportunity to modernise all of this, and it did it masterfully. The story is fast paced and has plenty of intrigue, specifically about the identity and especially the past of the Doctor.
 
-## The (Brand New) Doctor
-One of the more challenging things for Davies to introduce was probably the Doctor himself. On the one hand, there are so many fans who knew all about him, and this was also of course plenty of people's first Who episode. How do you satisfy both of those camps?
+The CGI isn't great by 2023 standards obviously, but it's such a massive step up from Classic and even the 1996 movie that I'm willing to say they did a great job for it. Same with the action sequences and the overall production value as a whole, it's clear that Davies had a lot of passion for this revival, and did his very best to make a good impression on new and old audiences alike.
 
-Casting someone new for the role was obvious. The Eighth Doctor portrayed by Paul McGann only appeared in one lukewarm movie almost a decade prior, I doubt he'd want to come back for this role just yet. Davies' choosing the *fantastic* Christopher Eccleston for the role, and crucially, having him regenerate into this form off screen, and recently.
+## The (Brand New) Doctor
+One of the more challenging things for Davies to introduce was the Doctor himself. On the one hand, there are so many fans who knew all about him, and this was also of course plenty of people's first Who episode. How do you satisfy both of those camps?
+
+Casting someone new for the role was obvious. The Eighth Doctor portrayed by Paul McGann only appeared in one lukewarm movie almost a decade prior, I doubt he'd want to come back for this role just yet. Davies' brilliance shone through in him choosing the *fantastic* Christopher Eccleston for the role, and crucially, having him regenerate into this form off screen, and recently.
+
+Because he regenerated off-screen, we really get to discover the character of the Doctor alongside Rose and especially himself. The first time inside Rose's apartment is even implied to be the first time he's properly looked at himself in this form, like being surprised at how big his ears are.
+
+I absolutely LOVE this approach to introducing the new character, starting off with a relatively blank slate, as new regenerations often do. The character we see was born out of war, and while we don't know that yet, it's fascinating to see that part of his personality in this episode, and much more so later on in the season.
 
 ![The Ninth Doctor in his TARDIS (TS 27:47)](./nine-in-tardis.png)
 <sup>The Ninth Doctor in his TARDIS (27:47)</sup>
 
 I won't lie, on my first watch as a child, I really was not a fan of Eccleston. My first doctor was Ten, and for eleven year old me, going back and watching Eccleston was jarring. Who was this man? This isn't the Doctor I know! I shamefully kept this opinion for quite a while, often skipping straight to series 2 whenever the mood to rewatch hit me. 
+Thankfully he did grow on me as I grew older, and these days Nine is just as well-loved as the other Revived Era Doctors.
 
-Thankfully he did grow on me massively as I grew older, and these days Nine is just as well-loved as, say, Ten or Eleven.
-
-Through Rose's eyes, we first see him as a 
+## The Companion
+Being the first episode of a new companion, there was 
