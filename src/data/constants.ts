@@ -12,8 +12,8 @@ export const MENU_LINKS = [
 		path: "/posts/"
 	},
 	{
-		title: "photography",
-		path: "/photography/",
+		title: "photos",
+		path: "/photos/",
 	},
 ];
 
