@@ -49,9 +49,9 @@ The CGI isn't great by 2023 standards obviously, but it's such a massive step up
 ## The (Brand New) Doctor
 One of the more challenging things for Davies to introduce was the Doctor himself. On the one hand, there are so many fans who knew all about him, and this was also of course plenty of people's first Who episode. How do you satisfy both of those camps?
 
-Casting someone new for the role was obvious. The Eighth Doctor portrayed by Paul McGann only appeared in one lukewarm movie almost a decade prior, I doubt he'd want to come back for this role just yet. Davies' brilliance shone through in him choosing the *fantastic* Christopher Eccleston for the role, and crucially, having him regenerate into this form off screen, and recently.
+Casting someone new for the role was obvious. The Eighth Doctor portrayed by Paul McGann only appeared in one lukewarm movie almost a decade prior, I doubt he'd want to come back for this role just yet.
 
-Because he regenerated off-screen, we really get to discover the character of the Doctor alongside Rose and especially himself. The first time inside Rose's apartment is even implied to be the first time he's properly looked at himself in this form, like being surprised at how big his ears are.
+But because he regenerated off-screen, we really get to discover the character of the Doctor alongside Rose and especially himself. The first time inside Rose's apartment is even implied to be the first time he's properly looked at himself in this form, like being surprised at how big his ears are.
 
 I absolutely LOVE this approach to introducing the new character, starting off with a relatively blank slate, as new regenerations often do. The character we see was born out of war, and while we don't know that yet, it's fascinating to see that part of his personality in this episode, and much more so later on in the season.
 
@@ -62,4 +62,4 @@ I won't lie, on my first watch as a child, I really was not a fan of Eccleston. 
 Thankfully he did grow on me as I grew older, and these days Nine is just as well-loved as the other Revived Era Doctors.
 
 ## The Companion
-Being the first episode of a new companion, there was 
+The show also had a lot riding on the new companion, Rose Tyler, being a likable yeah!
