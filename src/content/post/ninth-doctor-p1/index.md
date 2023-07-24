@@ -2,7 +2,7 @@
 title: "The Ninth Doctor Era: Part One"
 description: "Episode 1: Rose"
 publishDate: "14 Jul 2023"
-wordCount: 954
+wordCount: 902
 tags: ["doctor-who", "ninth-doctor-era"]
 ---
 
@@ -61,5 +61,8 @@ I absolutely LOVE this approach to introducing the new character, starting off w
 I won't lie, on my first watch as a child, I really was not a fan of Eccleston. My first doctor was Ten, and for eleven year old me, going back and watching Eccleston was jarring. Who was this man? This isn't the Doctor I know! I shamefully kept this opinion for quite a while, often skipping straight to series 2 whenever the mood to rewatch hit me. 
 Thankfully he did grow on me as I grew older, and these days Nine is just as well-loved as the other Revived Era Doctors.
 
-## The Companion
-The show also had a lot riding on the new companion, Rose Tyler, being a likable yeah!
+## The Companions
+Rose Tyler, her mum Jackie, and her boyfriend Mickey are the three main companions for the season, with Rose obviously being the focus. The pilot introduces Rose as being content with her relations to the other two, although you definitely get the feeling that she has the feeling to do more.
+
+Of course, once the Doctor enters her life, nothing stays the same. Rose runs off with him at second offer, leaving her mum and Mickey behind to deal with the consequences of not seeing a loved one for potentially months at a time. While we don't see the full effect this has on the two until later episodes such as *Boom Town*, it's pretty immediately clear with Mickey holding on to Rose's leg for dear life, that this essentially marks the end of their relationship.
+
