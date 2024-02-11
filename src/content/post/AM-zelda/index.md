@@ -23,4 +23,6 @@ i will do a proper analysis type thing on both of these games at some point,, *b
 
 the war is already over, you already lost, one century in the past. 
 
-breath of the wild is a look at a society that has already grieved the losses of the war, yet are still in the terrible limbo of being too soon to rebuild. it's an overwhelmingly evil world, yet the pockets of civilisation that are left or that were too far-flung to even notice are still thriving. my intense love for the world of botw comes from this contrast
+breath of the wild is a look at a society that has already grieved the losses of the war, yet are still in the terrible limbo of being too soon to rebuild. it's an overwhelmingly evil world, yet some pockets of civilisation – those that were too far-flung to even notice – are still thriving.
+
+my intense love for the world of botw comes from this contrast of the 
