@@ -24,7 +24,8 @@ const photo = defineCollection({
 	schema: z.object({
 		src: z.string(),
 		title: z.string(),
-		location: z.string().optional()
+		location: z.string().optional(),
+		camera: z.string().optional()
 	})
 })
 
