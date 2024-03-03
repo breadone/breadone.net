@@ -5,7 +5,11 @@ import type { CollectionEntry } from "astro:content";
 function calcReadTime(wordCount) {
 	let d = new Date()
 	d.setMinutes(wordCount/184);
-	return d.getMinutes().toLocaleString();
+	if (d.getMinutes() == 0) {
+		return "< 1";
+	} else {
+		return d.getMinutes().toLocaleString();
+	}
 }
 
 interface Props {
