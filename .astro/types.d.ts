@@ -241,6 +241,11 @@ declare module 'astro:content' {
   collection: "photo";
   data: InferEntrySchema<"photo">
 };
+"melbourne-star": {
+	id: "melbourne-star";
+  collection: "photo";
+  data: InferEntrySchema<"photo">
+};
 "mt-cook-in-the-distance": {
 	id: "mt-cook-in-the-distance";
   collection: "photo";
