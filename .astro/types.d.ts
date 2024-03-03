@@ -256,6 +256,11 @@ declare module 'astro:content' {
   collection: "photo";
   data: InferEntrySchema<"photo">
 };
+"scooter": {
+	id: "scooter";
+  collection: "photo";
+  data: InferEntrySchema<"photo">
+};
 "southern-alps": {
 	id: "southern-alps";
   collection: "photo";
@@ -273,6 +278,21 @@ declare module 'astro:content' {
 };
 "tekapo-sunrise": {
 	id: "tekapo-sunrise";
+  collection: "photo";
+  data: InferEntrySchema<"photo">
+};
+"the-library": {
+	id: "the-library";
+  collection: "photo";
+  data: InferEntrySchema<"photo">
+};
+"tramways": {
+	id: "tramways";
+  collection: "photo";
+  data: InferEntrySchema<"photo">
+};
+"tranquility": {
+	id: "tranquility";
   collection: "photo";
   data: InferEntrySchema<"photo">
 };
