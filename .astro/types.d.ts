@@ -320,6 +320,16 @@ declare module 'astro:content' {
   collection: "software";
   data: InferEntrySchema<"software">
 };
+"oncue": {
+	id: "oncue";
+  collection: "software";
+  data: InferEntrySchema<"software">
+};
+"swiftcord": {
+	id: "swiftcord";
+  collection: "software";
+  data: InferEntrySchema<"software">
+};
 };
 
 	};

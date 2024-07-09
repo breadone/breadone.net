@@ -1,0 +1,13 @@
+{
+    "name": "OnCue",
+    "description": "make cue cards and present speeches with your iPhone or Apple Watch. (working title & icon)",
+    "platforms": ["iOS"],
+    "iconSrc": "/sw_icons/oncue.png",
+    "get": "/404",
+    "links": [
+        {
+            "title": "privacy",
+            "url": "/software/privacy/oncue"
+        }
+    ]
+}

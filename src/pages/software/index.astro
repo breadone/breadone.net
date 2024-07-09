@@ -12,11 +12,11 @@ const meta = {
 
 <PageLayout meta={meta}>
 	<div class="">
-		<table class="table-fixed">
+		<table class="table-fixed space-y-5">
 			{
 				software.map(sw => (
 					<tr>
-					<td class="pr-2">
+					<td class="pr-5">
 						<img width="130" class="rounded-3xl" src={sw.data.iconSrc}/>
 					</td>
 					<td>
@@ -38,7 +38,7 @@ const meta = {
 							<a class="hover:underline text-[--theme-link]" href={sw.data.get}>get</a>
 							
 							{
-								sw.data.links.map(lnk => (
+								sw.data.links?.map(lnk => (
 									<p> |</p>
 									<a class="hover:underline text-[--theme-link]" href={lnk.url}>{lnk.title}</a>
 								))
