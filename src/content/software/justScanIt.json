@@ -3,7 +3,7 @@
     "description": "a document scanner with all the features you need and nothing you don't.",
     "platforms": ["iOS"],
     "iconSrc": "/sw_icons/justscanit.png",
-    "get": "/404",
+    "get": "https://apps.apple.com/app/just-scan-it/id6526477476",
     "links": [
         {
             "title": "privacy",
