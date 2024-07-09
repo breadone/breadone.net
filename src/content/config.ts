@@ -29,7 +29,25 @@ const photo = defineCollection({
 	})
 })
 
+const software = defineCollection({
+	type: "data",
+	schema: z.object({
+		name: z.string(),
+		description: z.string(),
+		iconSrc: z.string(),
+		get: z.string(),
+		pp: z.string().optional(),
+		platforms: z.array(z.string()),
+
+		links: z.array(z.object({
+			title: z.string(),
+			url: z.string()
+		}))
+	})
+})
+
 export const collections = {
 	'post': post,
 	'photo': photo,
+	'software': software
 };

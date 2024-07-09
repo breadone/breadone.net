@@ -198,6 +198,13 @@ declare module 'astro:content' {
 
 	type ContentEntryMap = {
 		"post": {
+"AM-zelda/index.md": {
+	id: "AM-zelda/index.md";
+  slug: "am-zelda";
+  body: string;
+  collection: "post";
+  data: InferEntrySchema<"post">
+} & { render(): Render[".md"] };
 "hello.md": {
 	id: "hello.md";
   slug: "hello";
@@ -305,6 +312,13 @@ declare module 'astro:content' {
 	id: "wellington-streaks";
   collection: "photo";
   data: InferEntrySchema<"photo">
+};
+};
+"software": {
+"justScanIt": {
+	id: "justScanIt";
+  collection: "software";
+  data: InferEntrySchema<"software">
 };
 };
 

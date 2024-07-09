@@ -1,0 +1,13 @@
+{
+    "name": "Just Scan It!",
+    "description": "a document scanner with all the features you need and nothing you don't.",
+    "platforms": ["iOS"],
+    "iconSrc": "/sw_icons/justscanit.png",
+    "get": "/404",
+    "links": [
+        {
+            "title": "privacy",
+            "url": "/software/privacy/justscanit"
+        }
+    ]
+}

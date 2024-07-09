@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@/layouts/Base";
+
+const software = await getCollection("software");
+
+const meta = {
+	title: "software",
+	description: "i make the software!",
+};
+---
+
+<PageLayout meta={meta}>
+	<div class="">
+		<table class="table-fixed">
+			{
+				software.map(sw => (
+					<tr>
+					<td class="pr-2">
+						<img width="130" class="rounded-3xl" src={sw.data.iconSrc}/>
+					</td>
+					<td>
+						<p class="title">{sw.data.name}</p>
+
+						<div class="flex space-x-2">
+							{
+							sw.data.platforms.map(pt => (
+								<p class="bg-[--theme-accent] px-1 py-0.5 rounded-md text-white">
+									{pt}
+								</p>
+							))
+						}
+						</div>
+
+						<p>{sw.data.description}</p>
+
+						<div class="flex space-x-2">
+							<a class="hover:underline text-[--theme-link]" href={sw.data.get}>get</a>
+							
+							{
+								sw.data.links.map(lnk => (
+									<p> |</p>
+									<a class="hover:underline text-[--theme-link]" href={lnk.url}>{lnk.title}</a>
+								))
+							}
+
+						</div>
+					</td>
+					</tr>
+				))
+			}
+		</table>
+	</div>
+</PageLayout>

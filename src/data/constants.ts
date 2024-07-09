@@ -15,6 +15,10 @@ export const MENU_LINKS = [
 		title: "photos",
 		path: "/photos/",
 	},
+	{
+		title: "software",
+		path: "/software/"
+	}
 ];
 
 export const SOCIAL_LINKS = {
