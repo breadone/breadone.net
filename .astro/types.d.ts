@@ -315,18 +315,18 @@ declare module 'astro:content' {
 };
 };
 "software": {
-"justScanIt": {
-	id: "justScanIt";
+"0justScanIt": {
+	id: "0justScanIt";
   collection: "software";
   data: InferEntrySchema<"software">
 };
-"oncue": {
-	id: "oncue";
+"1oncue": {
+	id: "1oncue";
   collection: "software";
   data: InferEntrySchema<"software">
 };
-"swiftcord": {
-	id: "swiftcord";
+"3swiftcord": {
+	id: "3swiftcord";
   collection: "software";
   data: InferEntrySchema<"software">
 };

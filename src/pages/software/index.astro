@@ -29,10 +29,17 @@ const meta = {
 									{pt}
 								</p>
 							))
-						}
+							}
+							{/* {
+							sw.data.langs?.map(lang => (
+								<p class={`bg-[#${lang.colour}] px-1 py-0.5 rounded-md text-white`}>
+									{lang.name}
+								</p>
+							))
+							} */}
 						</div>
 
-						<p>{sw.data.description}</p>
+						<p>{sw.data.desc}</p>
 
 						<div class="flex space-x-2">
 							<a class="hover:underline text-[--theme-link]" href={sw.data.get}>get</a>

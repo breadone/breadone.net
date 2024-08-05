@@ -1,6 +1,6 @@
 {
     "name": "Just Scan It!",
-    "description": "a document scanner with all the features you need and nothing you don't.",
+    "desc": "a document scanner with all the features you need and nothing you don't.",
     "platforms": ["iOS"],
     "iconSrc": "/sw_icons/justscanit.png",
     "get": "https://apps.apple.com/app/just-scan-it/id6526477476",
@@ -8,6 +8,16 @@
         {
             "title": "privacy",
             "url": "/software/privacy/justscanit"
+        }
+    ],
+    "langs": [
+        {
+            "name": "SwiftUI",
+            "colour": "ff7e30"
+        },
+        {
+            "name": "SwiftData",
+            "colour": "ff7e30"
         }
     ]
 }

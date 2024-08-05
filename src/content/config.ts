@@ -33,7 +33,7 @@ const software = defineCollection({
 	type: "data",
 	schema: z.object({
 		name: z.string(),
-		description: z.string(),
+		desc: z.string(),
 		iconSrc: z.string().optional(),
 		get: z.string(),
 		pp: z.string().optional(),
@@ -42,6 +42,11 @@ const software = defineCollection({
 		links: z.array(z.object({
 			title: z.string(),
 			url: z.string()
+		})).optional(),
+
+		langs: z.array(z.object({
+			name: z.string(),
+			colour: z.string()
 		})).optional()
 	})
 })
