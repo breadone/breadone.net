@@ -1,0 +1,7 @@
+services:
+  app:
+    container_name: bxyz
+    build: .
+    ports:
+      - 4321:4321
+    
