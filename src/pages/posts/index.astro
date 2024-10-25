@@ -30,7 +30,7 @@ const pages = dd['items'].map(i => (
             <div class="mb-5">
                 <time datetime={p['date']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['date'])}</time>
                 <div>
-                    <a href={`/posts2/${p['slug']}/`} class="cactus-link" rel="prefetch">
+                    <a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
                         {p['title']}
                     </a>
                 </div>
