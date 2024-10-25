@@ -36,10 +36,10 @@ const photos = dd['items'].map(i => (
 					photos.map(photo => (
 						<tr class="py-3">
 							<td class="pr-3">
-								<img alt={photo.title} src={photo.img} style=""/>
+								<img alt={photo.title == "" ? "Untitled" : photo.title} src={photo.img} style=""/>
 							</td>
 							<td class="align-super text-left">
-								<b>{photo.title}</b>
+								<b>{photo.title == "" ? "Untitled" : photo.title}</b>
 								<p class="pt-2">📌 {photo.location}</p>
 								<p class="align-baseline">📷 {photo.camera}</p>
 							</td>
