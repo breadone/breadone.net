@@ -1,0 +1,42 @@
+---
+import PageLayout from "@/layouts/Base";
+import { getFormattedDate } from "@/utils";
+
+const meta = {
+	title: "posts",
+	description: "some thoughts and maybe even opinions on a bunch of stuff",
+};
+
+const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records')
+const dd = await d.json()
+
+const pages = dd['items'].map(i => (
+        {
+            slug: i['slug'],
+            title: i['title'],
+            description: i['description'],
+            content: i['content'],
+            date: i['publishDate']
+        }
+))
+
+---
+
+<PageLayout meta={meta}>
+    <h1 class="title mb-8">my thoughts</h1>
+
+    {
+        pages.map(p => (
+            <div class="mb-5">
+                <time datetime={p['date']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['date'])}</time>
+                <div>
+                    <a href={`/posts2/${p['slug']}/`} class="cactus-link" rel="prefetch">
+                        {p['title']}
+                    </a>
+                </div>
+                <q class="pt-2 line-clamp-3 block italic">{p['description']}</q>
+            </div>
+        ))
+    }
+
+</PageLayout>

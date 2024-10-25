@@ -18,6 +18,10 @@ export const MENU_LINKS = [
 	{
 		title: "software",
 		path: "/software/"
+	},
+	{
+		title: "posts2",
+		path: "/posts2/"
 	}
 ];
 

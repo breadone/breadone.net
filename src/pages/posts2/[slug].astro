@@ -1,0 +1,121 @@
+---
+import type { GetStaticPaths } from "astro";
+import PageLayout from "@/layouts/Base";
+import { getFormattedDate } from "@/utils";
+
+const meta = {
+	title: "posts",
+	description: "some thoughts and maybe even opinions on a bunch of stuff",
+};
+
+export const getStaticPaths = (async () => {
+    const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records')
+    const dd = await d.json()
+
+    const pages = dd['items'].map(i => (
+        {
+            slug: i['slug'],
+            title: i['title'],
+            description: i['description'],
+            content: i['content'],
+            date: i['publishDate']
+        }
+    ))
+
+    return pages.map(({slug, title, description, content, date}) => {
+        return {
+            params: { slug },
+            props: { title, content, date, description }
+        }
+    });
+}) satisfies GetStaticPaths;
+
+function calcReadTime(wordCount) {
+	let d = new Date()
+    // avg reading rate of 184 wpm
+	d.setMinutes(wordCount/184);
+	if (d.getMinutes() == 0) {
+		return "< 1";
+	} else {
+		return d.getMinutes().toLocaleString();
+	}
+}
+
+
+const { title, content, date, description } = Astro.props
+
+const wordCount = content.split(' ').length;
+const readTime = calcReadTime(wordCount);
+const postDate = getFormattedDate(date, { month: "long" });
+---
+
+<PageLayout meta={meta}>
+    <article class="flex-grow break-words">
+        <div id="blog-hero">
+            <h1 class="title mb-3 sm:mb-1">{title}</h1>
+            <time datetime={date}>{postDate}</time> | 
+            {readTime} min. read
+            <!-- {
+                !!content.data.tags?.length && (
+                    <div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
+                        <svg
+                            aria-hidden="true"
+                            focusable="false"
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="mr-1 inline-block h-6 w-6"
+                            viewBox="0 0 24 24"
+                            stroke-width="1.5"
+                            stroke="currentColor"
+                            fill="none"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                            <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z" />
+                            <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
+                            <path d="M6 9h-.01" />
+                        </svg>
+                        {content.data.tags.map((tag, i) => (
+                            <>
+                                <a
+                                    class="cactus-link inline-block before:content-['#']"
+                                    aria-label={`View more blogs with the tag ${tag}`}
+                                    href={`/tags/${tag}/`}
+                                >
+                                    {tag}
+                                </a>
+                                {i < content.data.tags.length - 1 && ", "}
+                            </>
+                        ))}
+                    </div>
+                )
+            } -->
+            <p class="mt-4 italic">{description}</p>
+        </div>
+        <div
+            class="prose prose-sm prose-cactus mt-12 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
+        >
+            <Fragment set:html={content} />
+        </div>
+    </article>
+</PageLayout>
+
+
+<script>
+	const scrollBtn = document.getElementById("to-top-btn") as HTMLButtonElement;
+	const targetHeader = document.getElementById("blog-hero") as HTMLDivElement;
+
+	function callback(entries: IntersectionObserverEntry[]) {
+		entries.forEach((entry) => {
+			// only show the scroll to top button when the heading is out of view
+			scrollBtn.dataset.show = (!entry.isIntersecting).toString();
+		});
+	}
+
+	scrollBtn.addEventListener("click", () => {
+		document.documentElement.scrollTo({ top: 0, behavior: "smooth" });
+	});
+
+	const observer = new IntersectionObserver(callback);
+	observer.observe(targetHeader);
+</script>
