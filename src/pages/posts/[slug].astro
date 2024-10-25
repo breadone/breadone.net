@@ -1,34 +1,34 @@
 ---
-import type { GetStaticPaths } from "astro";
 import PageLayout from "@/layouts/Base";
 import { getFormattedDate } from "@/utils";
+
+export const prerender = false
 
 const meta = {
 	title: "posts",
 	description: "some thoughts and maybe even opinions on a bunch of stuff",
 };
 
-export const getStaticPaths = (async () => {
-    const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records')
-    const dd = await d.json()
+const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records')
+const dd = await d.json()
 
-    const pages = dd['items'].map(i => (
-        {
-            slug: i['slug'],
-            title: i['title'],
-            description: i['description'],
-            content: i['content'],
-            date: i['publishDate']
-        }
-    ))
+const pages = dd['items'].map(i => (
+    {
+        slug: i['slug'],
+        title: i['title'],
+        description: i['description'],
+        content: i['content'],
+        date: i['publishDate']
+    }
+))
 
-    return pages.map(({slug, title, description, content, date}) => {
-        return {
-            params: { slug },
-            props: { title, content, date, description }
-        }
-    });
-}) satisfies GetStaticPaths;
+
+// find page in pages
+const { slug } = Astro.params;
+
+const page = pages.find((page) => page['slug'] === slug);
+if (!page) return Astro.redirect("/404");
+const { title, content, date, description } = page
 
 function calcReadTime(wordCount) {
 	let d = new Date()
@@ -40,9 +40,6 @@ function calcReadTime(wordCount) {
 		return d.getMinutes().toLocaleString();
 	}
 }
-
-
-const { title, content, date, description } = Astro.props
 
 const wordCount = content.split(' ').length;
 const readTime = calcReadTime(wordCount);
