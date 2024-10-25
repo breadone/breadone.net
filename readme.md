@@ -1,9 +1,9 @@
 # breadone.xyz
 
-My personal website, built on [Astro](https://astro.build/). It's a little bit decrepit. 
+My personal website, built on [Astro](https://astro.build/). It's a work in progress, but I like what's on there already.
 
-I do still plan to write stuff there and i even have a few things drafted, but i just never got around to properly publishing them. 
+I write and take photos mostly, and I'll add more stuff as i think of it :)
 
-Also featuring photos I take, trying to be a proper photographer.
+On the technical side, it's hosted on an Oracle Cloud Compute instance using Docker and all custom configured networking using nginx.
 
-The heathclipped tab is a very legally grey image scraper for the comic series Heathcliff. I'm still not sure why I made that, but it's funny i think
+The content (posts, photos, etc) is managed via a custom CMS I made using Pocketbase, and the heathclipped service is a very legally grey web-scraper hosted using an AWS Lambda.
