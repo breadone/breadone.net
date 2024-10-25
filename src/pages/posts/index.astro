@@ -7,7 +7,7 @@ const meta = {
 	description: "some thoughts and maybe even opinions on a bunch of stuff",
 };
 
-const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records?sort=-created')
+const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records?sort=-publishDate')
 const dd = await d.json()
 
 const pages = dd['items'].map(i => (

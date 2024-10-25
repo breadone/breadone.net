@@ -4,7 +4,7 @@ import { getFormattedDate } from "@/utils";
 
 const MAX_POSTS = 10;
 
-const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records?sort=-created')
+const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records?sort=-publishDate')
 const dd = await d.json()
 
 const allPosts = dd['items'].map(i => (
