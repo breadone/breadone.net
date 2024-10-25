@@ -9,7 +9,8 @@ const meta = {
 	description: "some thoughts and maybe even opinions on a bunch of stuff",
 };
 
-const d = await fetch('http://0.0.0.0:8091/api/collections/posts/records')
+const pb = import.meta.env.PUBLIC_PB_URL
+const d = await fetch(`${pb}/api/collections/posts/records`)
 const dd = await d.json()
 
 const pages = dd['items'].map(i => (

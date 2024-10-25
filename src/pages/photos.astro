@@ -2,14 +2,14 @@
 import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base";
 
-const allPhotos = await getCollection("photo");
 
 const meta = {
 	title: "photography",
 	description: "i take the photos,,",
 };
 
-const d = await fetch('http://0.0.0.0:8091/api/collections/photos/records')
+const pb = import.meta.env.PUBLIC_PB_URL
+const d = await fetch(`${pb}/api/collections/photos/records`)
 const dd = await d.json()
 
 const photos = dd['items'].map(i => (
@@ -20,7 +20,7 @@ const photos = dd['items'].map(i => (
             camera: i['camera'],
             filename: i['image'],
 
-			img: `http://0.0.0.0:8091/api/files/photos/${i['id']}/${i['image']}`
+			img: `${pb}/api/files/photos/${i['id']}/${i['image']}`
         }
 ))
 ---
