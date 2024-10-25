@@ -2,11 +2,13 @@ FROM node:21
 
 WORKDIR /app
 
-COPY package*.json .
+COPY package*.json ./
 
 RUN npm install
 
 COPY . .
+
+ENV PUBLIC_PB_URL=https://api.breadone.xyz
 
 RUN npm run build
 
