@@ -8,39 +8,39 @@ const meta = {
 	title: "photography",
 	description: "i take the photos,,",
 };
+
+const d = await fetch('http://0.0.0.0:8091/api/collections/photos/records')
+const dd = await d.json()
+
+const photos = dd['items'].map(i => (
+        {
+			id: i['id'],
+            title: i['title'],
+            location: i['location'],
+            camera: i['camera'],
+            filename: i['image'],
+
+			img: `http://0.0.0.0:8091/api/files/photos/${i['id']}/${i['image']}`
+        }
+))
 ---
 
 <PageLayout meta={meta}>
 	<h1 class="title">photos!</h1>
 	<p class="mb-6">if you want any of these as prints, chuck me an email and i'll see what i can do!</p>
 	<div class="">
-			<!--<ul class="space-y-8 text-start">-->
-			<!--{-->
-			<!--	allPhotos.map(photo => (-->
-			<!--		<li>-->
-			<!--		<div class="flex">-->
-			<!--			<img alt={photo.data.title} src={photo.data.src} style="max-width: 60%"/>-->
-			<!--			<div class="px-4">-->
-			<!--				<b>{photo.data.title}</b>-->
-			<!--				<p class="mt-2">📌 {photo.data.location}</p>-->
-			<!--				<p class="align-baseline">📷 {photo.data.camera}</p>-->
-			<!--			</div>-->
-			<!--		</div>-->
-			<!--		</li>-->
-			<!--	))-->
-			<!--}-->
 			<!--</ul>-->
 			<table class="table-fixed">
 				{
-					allPhotos.map(photo => (
+					photos.map(photo => (
 						<tr class="py-3">
 							<td class="pr-3">
-								<img alt={photo.data.title} src={photo.data.src} style=""/>
+								<img alt={photo.title} src={photo.img} style=""/>
 							</td>
 							<td class="align-super text-left">
-								<b>{photo.data.title}</b>
-								<p class="pt-2">📌 {photo.data.location}</p>
-								<p class="align-baseline">📷 {photo.data.camera}</p>
+								<b>{photo.title}</b>
+								<p class="pt-2">📌 {photo.location}</p>
+								<p class="align-baseline">📷 {photo.camera}</p>
 							</td>
 						</tr>
 					))
