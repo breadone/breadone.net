@@ -4,22 +4,18 @@ import { getFormattedDate } from "@/utils";
 
 export const prerender = false
 
-const meta = {
-	title: "posts",
-	description: "some thoughts and maybe even opinions on a bunch of stuff",
-};
-
 const pb = import.meta.env.PUBLIC_PB_URL
 const d = await fetch(`${pb}/api/collections/posts/records`)
 const dd = await d.json()
 
 const pages = dd['items'].map(i => (
-    {
+    {   
         slug: i['slug'],
         title: i['title'],
         description: i['description'],
         content: i['content'],
-        date: i['publishDate']
+        date: i['publishDate'],
+        socialImage: `${pb}/api/files/posts/${i['id']}/${i['headerImage']}`
     }
 ))
 
@@ -45,6 +41,12 @@ function calcReadTime(wordCount) {
 const wordCount = content.split(' ').length;
 const readTime = calcReadTime(wordCount);
 const postDate = getFormattedDate(date, { month: "long" });
+
+const meta = {
+	title: "posts",
+	description: page.title,
+    ogImage: page.socialImage
+};
 ---
 
 <PageLayout meta={meta}>

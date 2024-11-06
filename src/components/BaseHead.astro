@@ -37,9 +37,9 @@ const socialImageURL = new URL(ogImage ? ogImage : "/icon.png", Astro.url).href;
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:site_name" content={siteConfig.title} />
 <meta property="og:locale" content={siteConfig.ogLocale} />
-<!-- <meta property="og:image" content={socialImageURL} /> -->
-<!-- <meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" /> -->
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
 {
 	articleDate && (
 		<>
