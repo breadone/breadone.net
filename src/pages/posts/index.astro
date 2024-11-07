@@ -19,7 +19,8 @@ const pages = dd['items'].map(i => (
             title: i['title'],
             description: i['description'],
             content: i['content'],
-            date: i['publishDate']
+            date: i['publishDate'],
+            socialImage: `${pb}/api/files/posts/${i['id']}/${i['headerImage']}`
         }
 ))
 
@@ -34,6 +35,7 @@ const pages = dd['items'].map(i => (
                 <time datetime={p['date']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['date'])}</time>
                 <div>
                     <a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
+                        <img src={p['socialImage']} width="400" class="py-2"/>
                         {p['title']}
                     </a>
                 </div>
