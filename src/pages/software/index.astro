@@ -50,48 +50,5 @@ const meta = {
 		</ul>
 		
 		</div>
-
-		<!-- <table class="table-fixed space-y-10 border-separate border-spacing-y-4">
-			{
-				software.map(sw => (
-					<tr>
-					<td class="pr-5">
-						<img width="130" class="rounded-3xl" src={ pb.files.getUrl(sw, sw.icon)}/>
-					</td>
-					<td>
-						<p class="title">{sw.name}</p>
-
-						<div class="flex space-x-2">
-							{
-							sw.platforms.map(pt => (
-								<p class="bg-[--theme-accent] px-1 py-0.5 my-1 rounded-md text-white">
-									{pt}
-								</p>
-							))
-							}
-							{/* {
-							sw.data.langs?.map(lang => (
-								<p class={`bg-[#${lang.colour}] px-1 py-0.5 rounded-md text-white`}>
-									{lang.name}
-								</p>
-							))
-							} */}
-						</div>
-
-						<p>{sw.description}</p>
-
-						<div class="flex space-x-2">
-							<a class="hover:underline text-[--theme-link]" href={sw.getLink}>get</a>
-							
-							<div class={sw.privacyPolicy === '' ? 'hidden' : ''}>
-								|
-								<a class="hover:underline text-[--theme-link]" href={ `/software/${encodeURIComponent(sw.name)}/privacy` }>privacy</a>
-							</div>
-
-						</div>
-					</td>
-					</tr>
-				))
-			}
-		</table> -->
+		
 </PageLayout>

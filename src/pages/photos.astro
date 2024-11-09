@@ -18,24 +18,29 @@ const photos = await pb.collection('photos').getFullList()
 	<h1 class="title">photos!</h1>
 	<p class="mb-6">if you want any of these as prints, chuck me an email and i'll see what i can do!</p>
 	<div class="">
-			<!--</ul>-->
-			<table class="table-fixed">
-				{
-					photos.map(photo => (
-						<tr class="py-3">
-							<td class="pr-3">
-								<a href={pb.files.getUrl(photo, photo.image)}>
-									<img alt={photo.title == "" ? "Untitled" : photo.title} src={ pb.files.getUrl(photo, photo.image) } style=""/>
-								</a>
-							</td>
-							<td class="align-super text-left">
-								<b>{photo.title == "" ? "Untitled" : photo.title}</b>
-								<p class="pt-2">📌 {photo.location}</p>
-								<p class="align-baseline">📷 {photo.camera}</p>
-							</td>
-						</tr>
-					))
-				}
-			</table>
+		<ul>
+			{
+				photos.map(photo => (
+				<div class="max-w-md  overflow-hidden md:max-w-2xl md:my-2">
+					<div class="md:flex">
+						<div class="md:shrink-0">
+							<a href={pb.files.getUrl(photo, photo.image)}>
+								<img class="h-full w-full object-cover md:h-full md:w-96" src={ pb.files.getUrl(photo, photo.image) } alt="Modern building architecture">
+							</a>
+						</div>
+						<div class="md:pl-4 md:mt-2 mb-8 mt-3">
+							<div class="bold text-xl">{photo.title === "" ? "Untitled" : photo.title}</div>
+
+							<div class="pt-2">
+								<p>📌 {photo.location}</p>
+								<p>📷 {photo.camera}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				))
+			}
+		</ul>
+		
 	</div>
 </PageLayout>
