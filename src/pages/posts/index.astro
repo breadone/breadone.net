@@ -1,6 +1,7 @@
 ---
 import PageLayout from "@/layouts/Base";
 import { getFormattedDate } from "@/utils";
+import Pocketbase from "pocketbase";
 
 export const prerender = false
 
@@ -9,20 +10,11 @@ const meta = {
 	description: "some thoughts and maybe even opinions on a bunch of stuff",
 };
 
-const pb = import.meta.env.PUBLIC_PB_URL
-const d = await fetch(`${pb}/api/collections/posts/records?sort=-publishDate`)
-const dd = await d.json()
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
-const pages = dd['items'].map(i => (
-        {
-            slug: i['slug'],
-            title: i['title'],
-            description: i['description'],
-            content: i['content'],
-            date: i['publishDate'],
-            socialImage: `${pb}/api/files/posts/${i['id']}/${i['headerImage']}`
-        }
-))
+const posts = await pb.collection('posts').getFullList({
+    sort: '-publishDate'
+})
 
 ---
 
@@ -30,12 +22,12 @@ const pages = dd['items'].map(i => (
     <h1 class="title mb-8">my thoughts</h1>
 
     {
-        pages.map(p => (
+        posts.map(p => (
             <div class="mb-5">
-                <time datetime={p['date']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['date'])}</time>
+                <time datetime={p['publishDate']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['publishDate'])}</time>
                 <div>
                     <a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
-                        <img src={p['socialImage']} width="400" class="py-2"/>
+                        <img src={ pb.files.getUrl(p, p.headerImage) } width="400" class="py-2"/>
                         {p['title']}
                     </a>
                 </div>

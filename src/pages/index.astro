@@ -1,22 +1,17 @@
 ---
 import PageLayout from "@/layouts/Base";
 import { getFormattedDate } from "@/utils";
+import Pocketbase from "pocketbase";
 
 // export const prerender = true
 
 const MAX_POSTS = 10;
 
-const pb = import.meta.env.PUBLIC_PB_URL
-const d = await fetch(`${pb}/api/collections/posts/records?sort=-publishDate`)
-const dd = await d.json()
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
-const allPosts = dd['items'].map(i => (
-        {
-            slug: i['slug'],
-            title: i['title'],
-            date: i['publishDate']
-        }
-))
+const allPosts = await pb.collection('posts').getFullList({
+    sort: '-publishDate'
+})
 
 const allPostsByDate = allPosts.slice(0, MAX_POSTS);
 ---
@@ -45,11 +40,11 @@ const allPostsByDate = allPosts.slice(0, MAX_POSTS);
 		<h2 class="title mb-4 text-xl">Recent Posts</h2>
 		<ul class="space-y-4 sm:space-y-2">
 			{
-				allPostsByDate.map((p) => (
+				allPostsByDate.map((post) => (
 					<li class="flex flex-col gap-x-2 sm:flex-row">
-						<time datetime={p['date']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['date'])}</time>
-						<a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
-                        {p['title']}
+						<time datetime={post.publishDate} class="min-w-[120px] text-gray-500">{getFormattedDate(post.publishDate)}</time>
+						<a href={`/posts/${post.slug}/`} class="cactus-link" rel="prefetch">
+                        {post.title}
                     </a>
 					</li>
 				))

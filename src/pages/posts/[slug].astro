@@ -1,32 +1,21 @@
 ---
 import PageLayout from "@/layouts/Base";
 import { getFormattedDate } from "@/utils";
+import Pocketbase from "pocketbase";
 
 export const prerender = false
 
-const pb = import.meta.env.PUBLIC_PB_URL
-const d = await fetch(`${pb}/api/collections/posts/records`)
-const dd = await d.json()
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
-const pages = dd['items'].map(i => (
-    {   
-        slug: i['slug'],
-        title: i['title'],
-        description: i['description'],
-        content: i['content'],
-        tags: i['tags'],
-        date: i['publishDate'],
-        socialImage: `${pb}/api/files/posts/${i['id']}/${i['headerImage']}`
-    }
-))
+const posts = await pb.collection('posts').getFullList()
 
 
 // find page in pages
 const { slug } = Astro.params;
 
-const page = pages.find((page) => page['slug'] === slug);
+const page = posts.find((page) => page['slug'] === slug);
 if (!page) return Astro.redirect("/404");
-const { title, content, date, description } = page
+const { title, content, publishDate, description } = page
 
 function calcReadTime(wordCount) {
 	let d = new Date()
@@ -41,21 +30,21 @@ function calcReadTime(wordCount) {
 
 const wordCount = content.split(' ').length;
 const readTime = calcReadTime(wordCount);
-const postDate = getFormattedDate(date, { month: "long" });
+const formattedPublishDate = getFormattedDate(publishDate, { month: "long" });
 
 const meta = {
 	title: "posts",
 	description: page.title,
-    ogImage: page.socialImage
+    ogImage: pb.files.getUrl(page, page.headerImage)
 };
 ---
 
 <PageLayout meta={meta}>
     <article class="flex-grow break-words">
         <div id="blog-hero">
-            <img src={page.socialImage} width="550" class="my-2"/>
+            <img src={ pb.files.getUrl(page, page.headerImage) } width="550" class="my-2"/>
             <h1 style="max-width: 40ch;" class="title mb-3 mt-5 ">{title}</h1>
-            <time datetime={date}>{postDate}</time> | 
+            <time datetime={publishDate}>{formattedPublishDate}</time> | 
             {readTime} min. read
             <!-- {
                 !!page.tags.length && (

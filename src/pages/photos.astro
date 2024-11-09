@@ -1,5 +1,6 @@
 ---
 import PageLayout from "@/layouts/Base";
+import Pocketbase from "pocketbase";
 
 export const prerender = false
 
@@ -8,21 +9,9 @@ const meta = {
 	description: "i take the photos,,",
 };
 
-const pb = import.meta.env.PUBLIC_PB_URL
-const d = await fetch(`${pb}/api/collections/photos/records`)
-const dd = await d.json()
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
-const photos = dd['items'].map(i => (
-        {
-			id: i['id'],
-            title: i['title'],
-            location: i['location'],
-            camera: i['camera'],
-            filename: i['image'],
-
-			img: `${pb}/api/files/photos/${i['id']}/${i['image']}`
-        }
-))
+const photos = await pb.collection('photos').getFullList()
 ---
 
 <PageLayout meta={meta}>
@@ -35,7 +24,9 @@ const photos = dd['items'].map(i => (
 					photos.map(photo => (
 						<tr class="py-3">
 							<td class="pr-3">
-								<img alt={photo.title == "" ? "Untitled" : photo.title} src={photo.img} style=""/>
+								<a href={pb.files.getUrl(photo, photo.image)}>
+									<img alt={photo.title == "" ? "Untitled" : photo.title} src={ pb.files.getUrl(photo, photo.image) } style=""/>
+								</a>
 							</td>
 							<td class="align-super text-left">
 								<b>{photo.title == "" ? "Untitled" : photo.title}</b>
