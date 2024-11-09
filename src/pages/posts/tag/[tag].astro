@@ -15,7 +15,7 @@ const posts = await pb.collection('posts').getFullList({
 
 <PageLayout meta={{title: 'test'}}>
     <p class="title">{posts.length} {posts.length === 1 ? ' post' : ' posts'} with tag '{tag}'</p>
-    <a href="/posts" class="cactus-link">[back]</a>
+    <a href="/posts" class="cactus-link">[all posts]</a>
     <br><br>
     {
         posts.map(p => (
