@@ -46,7 +46,7 @@ const meta = {
             <h1 style="max-width: 40ch;" class="title mb-3 mt-5 ">{title}</h1>
             <time datetime={publishDate}>{formattedPublishDate}</time> | 
             {readTime} min. read
-            <!-- {
+            {
                 !!page.tags.length && (
                     <div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
                         <svg
@@ -70,8 +70,7 @@ const meta = {
                             <>
                                 <a
                                     class="cactus-link inline-block before:content-['#']"
-                                    aria-label={`View more blogs with the tag ${tag}`}
-                                    href={`/tags/${tag}/`}
+                                    href={`/posts/tag/${tag}/`}
                                 >
                                     {tag}
                                 </a>
@@ -80,7 +79,7 @@ const meta = {
                         ))}
                     </div>
                 )
-            } -->
+            }
             <p class="mt-4 italic">{description}</p>
         </div>
         <div

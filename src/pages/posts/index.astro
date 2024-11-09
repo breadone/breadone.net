@@ -16,24 +16,57 @@ const posts = await pb.collection('posts').getFullList({
     sort: '-publishDate'
 })
 
+const tags = posts.flatMap(p => p.tags)
+const uniqueTags = tags.filter((v, i, a) => a.indexOf(v) === i)
 ---
 
 <PageLayout meta={meta}>
     <h1 class="title mb-8">my thoughts</h1>
+    <div class="grid gap-y-16 sm:grid-cols-[3fr_1fr] sm:gap-x-8">
+    <section>
+        {
+            posts.map(p => (
+                <div class="mb-5">
+                    <time datetime={p['publishDate']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['publishDate'])}</time>
+                    <div>
+                        <a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
+                            <img src={ pb.files.getUrl(p, p.headerImage) } width="400" class="py-2"/>
+                            {p['title']}
+                        </a>
+                    </div>
+                    <q class="pt-2 line-clamp-3 block italic">{p['description']}</q>
+                </div>
+            ))
+        }
+    </section>
 
     {
-        posts.map(p => (
-            <div class="mb-5">
-                <time datetime={p['publishDate']} class="min-w-[120px] text-gray-500">{getFormattedDate(p['publishDate'])}</time>
-                <div>
-                    <a href={`/posts/${p['slug']}/`} class="cactus-link" rel="prefetch">
-                        <img src={ pb.files.getUrl(p, p.headerImage) } width="400" class="py-2"/>
-                        {p['title']}
+        uniqueTags.length && (
+            <aside>
+                <h2 class="mb-2 flex items-center text-lg font-semibold">
+                    tags
+                </h2>
+                <ul class="flex flex-wrap gap-2 text-bgColor">
+                    {uniqueTags.map((tag) => (
+                        <li>
+                            <a
+                                class="flex items-center justify-center rounded-lg bg-accent p-1"
+                                href={`/posts/tag/${tag}/`}
+                                aria-label={`View all posts with the tag: ${tag}`}
+                            >
+                                {tag}
+                            </a>
+                        </li>
+                    ))}
+                </ul>
+                {/* <span class="mt-4 block sm:text-end">
+                    <a class="sm:hover:text-accent" href="/tags/" aria-label="View all blog categories">
+                        View all →
                     </a>
-                </div>
-                <q class="pt-2 line-clamp-3 block italic">{p['description']}</q>
-            </div>
-        ))
+                </span> */}
+            </aside>
+        )
     }
+    </div>
 
 </PageLayout>
