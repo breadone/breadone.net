@@ -13,6 +13,9 @@ export default defineConfig({
   experimental: {
     assets: true
    },
+  redirects: {
+    '/software/privacy/justscanit': '/software/Just Scan It/privacy'
+  },
   markdown: {
     shikiConfig: {
       theme: "dracula",

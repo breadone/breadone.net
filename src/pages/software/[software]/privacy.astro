@@ -1,0 +1,25 @@
+---
+import PageLayout from "@/layouts/Base";
+import Pocketbase from "pocketbase";
+
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
+
+const softwareCollection = await pb.collection('software').getFullList()
+
+const meta = {
+	title: "software",
+	description: "i make the software!",
+};
+
+const { software } = Astro.params
+
+const sw = softwareCollection.find(s => s.name === decodeURIComponent(software))
+if (!sw) return Astro.redirect("/404");
+
+---
+
+<PageLayout meta={meta}>
+    <p class="title">Privacy Policy for {sw.name}</p>
+    <br>
+    <Fragment set:html={sw.privacyPolicy}/>
+</PageLayout>

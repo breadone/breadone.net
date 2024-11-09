@@ -1,13 +1,21 @@
 ---
-import { getCollection } from "astro:content";
 import PageLayout from "@/layouts/Base";
+import Pocketbase from "pocketbase";
 
-const software = await getCollection("software");
+const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
+
+const software = await pb.collection('software').getFullList()
 
 const meta = {
 	title: "software",
 	description: "i make the software!",
 };
+
+function isHidden(sw: any) {
+	if (sw.privacyPolicy == '') {
+		return 'hidden'
+	}
+}
 ---
 
 <PageLayout meta={meta}>
@@ -17,14 +25,14 @@ const meta = {
 				software.map(sw => (
 					<tr>
 					<td class="pr-5">
-						<img width="130" class="rounded-3xl" src={sw.data.iconSrc}/>
+						<img width="130" class="rounded-3xl" src={ pb.files.getUrl(sw, sw.icon)}/>
 					</td>
 					<td>
-						<p class="title">{sw.data.name}</p>
+						<p class="title">{sw.name}</p>
 
 						<div class="flex space-x-2">
 							{
-							sw.data.platforms.map(pt => (
+							sw.platforms.map(pt => (
 								<p class="bg-[--theme-accent] px-1 py-0.5 rounded-md text-white">
 									{pt}
 								</p>
@@ -39,17 +47,15 @@ const meta = {
 							} */}
 						</div>
 
-						<p>{sw.data.desc}</p>
+						<p>{sw.description}</p>
 
 						<div class="flex space-x-2">
-							<a class="hover:underline text-[--theme-link]" href={sw.data.get}>get</a>
+							<a class="hover:underline text-[--theme-link]" href={sw.getLink}>get</a>
 							
-							{
-								sw.data.links?.map(lnk => (
-									<p> |</p>
-									<a class="hover:underline text-[--theme-link]" href={lnk.url}>{lnk.title}</a>
-								))
-							}
+							<div class={isHidden(sw)}>
+								|
+								<a class="hover:underline text-[--theme-link]" href={ `/software/${encodeURIComponent(sw.name)}/privacy` }>privacy</a>
+							</div>
 
 						</div>
 					</td>
