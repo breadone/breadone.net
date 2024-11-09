@@ -197,117 +197,11 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		"post": {
-"hello.md": {
-	id: "hello.md";
-  slug: "hello";
-  body: string;
-  collection: "post";
-  data: InferEntrySchema<"post">
-} & { render(): Render[".md"] };
-};
-
+		
 	};
 
 	type DataEntryMap = {
-		"photo": {
-"boat-on-fjord": {
-	id: "boat-on-fjord";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"boat-on-shore": {
-	id: "boat-on-shore";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"crescent-moon": {
-	id: "crescent-moon";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"dolphin-in-the-distance": {
-	id: "dolphin-in-the-distance";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"farewell-strait": {
-	id: "farewell-strait";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"lightbulb": {
-	id: "lightbulb";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"melbourne-star": {
-	id: "melbourne-star";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"mt-cook-in-the-distance": {
-	id: "mt-cook-in-the-distance";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"queenstown-mountain": {
-	id: "queenstown-mountain";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"scooter": {
-	id: "scooter";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"southern-alps": {
-	id: "southern-alps";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"statue": {
-	id: "statue";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"taranaki": {
-	id: "taranaki";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"tekapo-sunrise": {
-	id: "tekapo-sunrise";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"the-library": {
-	id: "the-library";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"tramways": {
-	id: "tramways";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"tranquility": {
-	id: "tranquility";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"village-in-the-shadow": {
-	id: "village-in-the-shadow";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-"wellington-streaks": {
-	id: "wellington-streaks";
-  collection: "photo";
-  data: InferEntrySchema<"photo">
-};
-};
-"software": {
+		"software": {
 "0justScanIt": {
 	id: "0justScanIt";
   collection: "software";
