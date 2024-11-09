@@ -10,17 +10,48 @@ const meta = {
 	title: "software",
 	description: "i make the software!",
 };
-
-function isHidden(sw: any) {
-	if (sw.privacyPolicy == '') {
-		return 'hidden'
-	}
-}
 ---
 
 <PageLayout meta={meta}>
 	<div class="">
-		<table class="table-fixed space-y-5">
+		<ul>
+			{
+				software.map(sw => (
+					<div class="max-w-md mx-auto overflow-hidden md:max-w-2xl md:mb-5">
+						<div class="md:flex">
+							<div class="md:shrink-0">
+								<img class="rounded-2xl object-cover md:h-28 md:w-28" src={ pb.files.getUrl(sw, sw.icon) } alt={`Icon for ${sw.name}`}>
+							</div>
+							<div class="md:pl-8 py-8 md:py-0">
+								<div class="title font-semibold">{sw.name}</div>
+								<p class="mt-2">{sw.description}</p>
+								<div class="flex space-x-2 items-center">
+									{
+										sw.platforms.map(pt => (
+										<p class="bg-[--theme-accent] px-1 py-0.5 my-1 rounded-md text-white">
+											{pt}
+										</p>
+										))
+									}
+									
+									<a class="hover:underline text-[--theme-link] pl-1" href={sw.getLink}>get</a>
+									
+									<div class={sw.privacyPolicy === '' ? 'hidden' : ''}>
+										|
+										<a class="hover:underline text-[--theme-link]" href={ `/software/${encodeURIComponent(sw.name)}/privacy` }>privacy</a>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				))
+			}
+		</ul>
+		
+		</div>
+
+		<!-- <table class="table-fixed space-y-10 border-separate border-spacing-y-4">
 			{
 				software.map(sw => (
 					<tr>
@@ -33,7 +64,7 @@ function isHidden(sw: any) {
 						<div class="flex space-x-2">
 							{
 							sw.platforms.map(pt => (
-								<p class="bg-[--theme-accent] px-1 py-0.5 rounded-md text-white">
+								<p class="bg-[--theme-accent] px-1 py-0.5 my-1 rounded-md text-white">
 									{pt}
 								</p>
 							))
@@ -52,7 +83,7 @@ function isHidden(sw: any) {
 						<div class="flex space-x-2">
 							<a class="hover:underline text-[--theme-link]" href={sw.getLink}>get</a>
 							
-							<div class={isHidden(sw)}>
+							<div class={sw.privacyPolicy === '' ? 'hidden' : ''}>
 								|
 								<a class="hover:underline text-[--theme-link]" href={ `/software/${encodeURIComponent(sw.name)}/privacy` }>privacy</a>
 							</div>
@@ -62,6 +93,5 @@ function isHidden(sw: any) {
 					</tr>
 				))
 			}
-		</table>
-	</div>
+		</table> -->
 </PageLayout>

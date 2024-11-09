@@ -16,6 +16,9 @@ const { software } = Astro.params
 const sw = softwareCollection.find(s => s.name === decodeURIComponent(software))
 if (!sw) return Astro.redirect("/404");
 
+if (sw.privacyPolicy === '') {
+    return Astro.redirect('/404')
+}
 ---
 
 <PageLayout meta={meta}>
