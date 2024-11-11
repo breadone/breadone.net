@@ -100,55 +100,43 @@ const meta = {
 </PageLayout>
 
 <script>
-    function generateLinks(array, depth) {
-        for (let i = 01``; i < array.length; i++) {
-            let lnk = document.createElement('a')
-            lnk.href=`#${array[i]?.id}`
-            lnk.className = 'mt-2 ps-3 text-[0.6875rem]'
-            lnk.innerHTML = `<span class="mr-1">${"#".repeat(depth)}</span>${array[i]?.innerHTML}`
-
-            let li = document.createElement('li')
-            li.className = 'line-clamp-2 hover:text-accent'
-            li.appendChild(lnk)
-
-            toc?.appendChild(li)
-        }
-    }
-
-    const h1 = document.getElementsByTagName('h1')
-    const h2 = document.getElementsByTagName('h2')
-    const h3 = document.getElementsByTagName('h3')
-
-    const toc = document.getElementById('toc')
-    const toc_cnt = document.getElementById('toc-container')
-
-    if (h2.length > 1) {
-        toc_cnt?.classList.add( 'lg:block')
-    }
-
-    // make title anchor
-    let lnk = document.createElement('a')
-    lnk.href=`#${h1[0].id}`
-    lnk.className = 'mt-2 ps-3 text-[0.6875rem] line-clamp-1'
-    lnk.innerHTML = `<span class="mr-1">${"#".repeat(1)}</span>${h1[0].title}`
-
-    let li = document.createElement('li')
-    li.className = 'line-clamp-2 hover:text-accent'
-    li.appendChild(lnk)
-
-    toc?.appendChild(li)
-    
-
-    for (let i = 1; i < h2.length; i++) {
+    function addLink(tag: Element, depth: number) {
         let lnk = document.createElement('a')
-        lnk.href=`#${h2[i]?.id}`
-        lnk.className = 'mt-2 ps-3 text-[0.6875rem]'
-        lnk.innerHTML = `<span class="mr-1">${"#".repeat(2)}</span>${h2[i]?.innerHTML}`
+        lnk.href=`#${tag.id}`
+        lnk.className = 'mt-2 text-[0.6875rem]'
+        lnk.innerHTML = `<span class="mr-1">${"#".repeat(depth)}</span>${tag.innerHTML}`
 
         let li = document.createElement('li')
-        li.className = 'line-clamp-2 hover:text-accent'
+        li.className = 'line-clamp-1 hover:text-accent'
         li.appendChild(lnk)
 
         toc?.appendChild(li)
+    }
+
+    // get all titles in the page
+    const titles = document.querySelectorAll('h1, h2, h3')
+    const toc = document.getElementById('toc') as Element
+    const toc_cnt = document.getElementById('toc-container') as Element
+
+    // if there's more than two titles (ie, there's more than just the article title and TOC title, then appropriate to show)
+    if (titles.length > 2) {
+        toc_cnt.classList.add('lg:block')
+    }
+
+    for (let i = 1; i < titles.length; i++) {
+        const t = titles[i] as Element
+        let depth = 1
+
+        // determine what depth to use
+        switch (t.tagName) {
+            case 'H2':
+                depth = 2
+                break
+            case 'H3':
+                depth = 3
+                break
+        }
+
+        addLink(t, depth)
     }
 </script>
