@@ -40,52 +40,107 @@ const meta = {
 ---
 
 <PageLayout meta={meta}>
-    <article class="flex-grow break-words">
-        <div id="blog-hero">
-            <img src={ pb.files.getUrl(page, page.headerImage) } width="550" class="my-2"/>
-            <h1 style="max-width: 40ch;" class="title mb-3 mt-5 ">{title}</h1>
-            <time datetime={publishDate}>{formattedPublishDate}</time> | 
-            {readTime} min. read
-            {
-                !!page.tags.length && (
-                    <div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
-                        <svg
-                            aria-hidden="true"
-                            focusable="false"
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="mr-1 inline-block h-6 w-6"
-                            viewBox="0 0 24 24"
-                            stroke-width="1.5"
-                            stroke="currentColor"
-                            fill="none"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
-                        >
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z" />
-                            <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
-                            <path d="M6 9h-.01" />
-                        </svg>
-                        {page.tags.map((tag, i) => (
-                            <>
-                                <a
-                                    class="cactus-link inline-block before:content-['#']"
-                                    href={`/posts/tag/${tag}/`}
-                                >
-                                    {tag}
-                                </a>
-                                {i < page.tags.length - 1 && ", "}
-                            </>
-                        ))}
-                    </div>
-                )
-            }
-            <p class="mt-4 italic font-bold">{description}</p>
-        </div>
-        <div
-            class="prose prose-sm prose-cactus mt-8 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
-        >
-            <Fragment set:html={content} />
-        </div>
-    </article>
+    <div class="gap-x-4 lg:flex lg:items-start">
+        <aside id="toc-container" class="sticky top-20 order-2 -me-32 hidden basis-64 ">
+            <h2 class=" text-lg font-semibold">Table of Contents</h2>
+            <ul id="toc" class="text-xs">
+                
+            </ul>
+        </aside>
+        <article class="flex-grow break-words">
+            <div id="blog-hero">
+                <img src={ pb.files.getUrl(page, page.headerImage) } width="550" class="my-2"/>
+                <h1 id="title" title={page.title} style="max-width: 40ch;" class="title mb-3 mt-5 ">{title}</h1>
+                <time datetime={publishDate}>{formattedPublishDate}</time> | 
+                {readTime} min. read
+                {
+                    !!page.tags.length && (
+                        <div class="mt-1 sm:mt-0 sm:inline sm:before:mr-2 sm:before:content-['|']">
+                            <svg
+                                aria-hidden="true"
+                                focusable="false"
+                                xmlns="http://www.w3.org/2000/svg"
+                                class="mr-1 inline-block h-6 w-6"
+                                viewBox="0 0 24 24"
+                                stroke-width="1.5"
+                                stroke="currentColor"
+                                fill="none"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                <path d="M7.859 6h-2.834a2.025 2.025 0 0 0 -2.025 2.025v2.834c0 .537 .213 1.052 .593 1.432l6.116 6.116a2.025 2.025 0 0 0 2.864 0l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-6.117 -6.116a2.025 2.025 0 0 0 -1.431 -.593z" />
+                                <path d="M17.573 18.407l2.834 -2.834a2.025 2.025 0 0 0 0 -2.864l-7.117 -7.116" />
+                                <path d="M6 9h-.01" />
+                            </svg>
+                            {page.tags.map((tag, i) => (
+                                <>
+                                    <a
+                                        class="cactus-link inline-block before:content-['#']"
+                                        href={`/posts/tag/${tag}/`}
+                                    >
+                                        {tag}
+                                    </a>
+                                    {i < page.tags.length - 1 && ", "}
+                                </>
+                            ))}
+                        </div>
+                    )
+                }
+                <p class="mt-4 italic font-bold">{description}</p>
+            </div>
+            <div
+                class="prose prose-sm prose-cactus mt-8 prose-headings:font-semibold prose-headings:before:absolute prose-headings:before:-ms-4 prose-headings:before:text-accent prose-headings:before:content-['#'] prose-th:before:content-none"
+            >
+                <Fragment set:html={content} />
+            </div>
+        </article>
+
+    </div>
 </PageLayout>
+
+<script>
+    function addLink(tag: Element, depth: number) {
+        let lnk = document.createElement('a')
+        lnk.href=`#${tag.id}`
+        lnk.className = 'mt-2 text-[0.6875rem]'
+        lnk.innerHTML = `<span class="mr-1">${"#".repeat(depth)}</span>${tag.innerHTML}`
+
+        let li = document.createElement('li')
+        li.className = 'line-clamp-1 hover:text-accent'
+        li.appendChild(lnk)
+
+        toc?.appendChild(li)
+    }
+
+    // get all titles in the page
+    const titles = document.querySelectorAll('h1, h2, h3')
+    const toc = document.getElementById('toc') as Element
+    const toc_cnt = document.getElementById('toc-container') as Element
+
+    // if there's more than two titles (ie, there's more than just the article title and TOC title, then appropriate to show)
+    if (titles.length > 2) {
+        toc_cnt.classList.add('lg:block')
+    }
+
+    for (let i = 1; i < titles.length; i++) {
+        const t = titles[i] as Element
+
+        // Assign IDs in case they haven't been (by me)
+        t.id = t.innerHTML
+
+        let depth = 1
+
+        // determine what depth to use
+        switch (t.tagName) {
+            case 'H2':
+                depth = 2
+                break
+            case 'H3':
+                depth = 3
+                break
+        }
+
+        addLink(t, depth)
+    }
+</script>
