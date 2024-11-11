@@ -125,6 +125,10 @@ const meta = {
 
     for (let i = 1; i < titles.length; i++) {
         const t = titles[i] as Element
+
+        // Assign IDs in case they haven't been (by me)
+        t.id = t.innerHTML
+
         let depth = 1
 
         // determine what depth to use
