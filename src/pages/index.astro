@@ -10,7 +10,8 @@ const MAX_POSTS = 10;
 const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
 const allPosts = await pb.collection('posts').getFullList({
-    sort: '-publishDate'
+    sort: '-publishDate',
+	filter: 'published=true'
 })
 
 const allPostsByDate = allPosts.slice(0, MAX_POSTS);

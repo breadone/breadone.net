@@ -13,7 +13,8 @@ const meta = {
 const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
 const posts = await pb.collection('posts').getFullList({
-    sort: '-publishDate'
+    sort: '-publishDate',
+    filter: 'published=true'
 })
 
 const tags = posts.flatMap(p => p.tags)
