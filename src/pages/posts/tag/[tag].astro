@@ -8,7 +8,8 @@ const { tag } = Astro.params;
 
 const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 const posts = await pb.collection('posts').getFullList({
-    filter: `tags ~ "${tag}"`
+    sort: '-publishDate',
+    filter: `tags ~ "${tag}" && published=true`
 })
 
 ---
