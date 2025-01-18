@@ -8,7 +8,7 @@ RUN npm install
 
 COPY . .
 
-ENV PUBLIC_PB_URL=https://api.breadone.xyz
+ENV PUBLIC_PB_URL=https://api.breadone.net
 
 RUN npm run build
 

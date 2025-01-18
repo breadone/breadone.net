@@ -6,7 +6,7 @@ services:
       - "4321:4321"
       - "3000:3000"
     environment:
-      - PUBLIC_PB_URL=https://breadone.xyz
+      - PUBLIC_PB_URL=https://api.breadone.net
     depends_on:
       - pocketbase
 

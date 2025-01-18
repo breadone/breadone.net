@@ -1,4 +1,4 @@
-# breadone.xyz
+# breadone.net
 
 My personal website, built on [Astro](https://astro.build/). It's a work in progress, but I like what's on there already.
 
