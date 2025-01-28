@@ -2,13 +2,14 @@
 export const prerender = false
 import PageLayout from "@/layouts/Base";
 
+const res = await fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/");
+const heathcliffImageURL = await res.text();
+
 const meta = {
 	title: "heathclipped",
 	description: "funny orange cat image",
+	ogImage: heathcliffImageURL
 };
-
-const res = await fetch("https://fv2bx5g2lkhjejn5vd7ebdek5m0phygn.lambda-url.ap-southeast-2.on.aws/");
-const heathcliffImageURL = await res.text();
 ---
 
 <PageLayout meta={meta}>
