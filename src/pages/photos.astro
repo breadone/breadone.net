@@ -11,7 +11,9 @@ const meta = {
 
 const pb = new Pocketbase(import.meta.env.PUBLIC_PB_URL)
 
-const photos = await pb.collection('photos').getFullList()
+const photos = await pb.collection('photos').getFullList({
+	sort: '-created'
+})
 ---
 
 <PageLayout meta={meta}>
