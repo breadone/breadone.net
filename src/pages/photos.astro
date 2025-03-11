@@ -26,8 +26,8 @@ const photos = await pb.collection('photos').getFullList({
 				<div class="max-w-md  overflow-hidden md:max-w-2xl md:my-2">
 					<div class="md:flex">
 						<div class="md:shrink-0">
-							<a href={pb.files.getUrl(photo, photo.image)}>
-								<img class="h-full w-full object-cover md:h-full md:w-96" src={ pb.files.getUrl(photo, photo.image) } alt={photo.alt}>
+							<a href={pb.files.getUrl(photo, photo.image, {'thumb': '1400x0'})}>
+								<img class="h-full w-full object-cover md:h-full md:w-96" src={ pb.files.getUrl(photo, photo.image, {'thumb': '1080x0'}) } alt={photo.alt}>
 							</a>
 						</div>
 						<div class="md:pl-4 md:mt-2 mb-8 mt-3">
