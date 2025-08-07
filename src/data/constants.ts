@@ -22,7 +22,7 @@ export const MENU_LINKS = [
 ];
 
 export const SOCIAL_LINKS = {
-	email: "bohrium_sugars_0g@icloud.com",
+	email: "contact@breadone.net",
 	github: "https://github.com/breadone",
 	fedi: "https://blahaj.zone/@breadone"
 };
