@@ -6,11 +6,11 @@ const pb = await authPB()
 
 <div class="swiper-slide flex flex-col md:flex-row items-center justify-center">
     <a class="b1-no-underline" href={`/albums/${encodeURI(a.title)}`}>
-        <h1 class="text-center pb-0 md:flex-1">{a.title}</h1>
-        <p class="text-center">{a.date}</p>
+        <h1 class="text-center pb-0">{a.title}</h1>
+        <p class="text-center pb-3">{a.date}</p>
         <img 
             src={pb.files.getURL(a, a.images[0])} 
-            class="w-full h-full object-contain"
+            class="w-full max-h-[70vh] pb-4 object-cover"
             loading="lazy"
             alt={a.title}
         />
