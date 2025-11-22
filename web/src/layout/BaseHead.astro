@@ -12,7 +12,7 @@ const socialImageURL = new URL(ogImage ? ogImage : "/icon.png", Astro.url).href;
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" href="/favicon.svg" sizes="any" />
 
 <!-- Primary Meta Tags -->
 <title>{siteTitle}</title>
@@ -31,8 +31,8 @@ const socialImageURL = new URL(ogImage ? ogImage : "/icon.png", Astro.url).href;
 <meta property="og:site_name" content={siteConfig.title} />
 <meta property="og:locale" content={siteConfig.ogLocale} />
 <meta property="og:image" content={socialImageURL} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="630" />
+<meta property="og:image:width" content="1500" />
+<meta property="og:image:height" content="1500" />
 {
 	articleDate && (
 		<>
