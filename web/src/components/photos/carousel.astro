@@ -1,0 +1,102 @@
+---
+import { authPB } from "src/utils/pocketbase";
+
+// export const prerender = false
+
+const pb = await authPB()
+const photos = await pb.collection('photos').getFullList({
+    sort: '-created',
+    filter: 'published=true'
+})
+
+const photoLinks = await Promise.all(
+    photos.map(p => pb.files.getURL(p, p.image, { thumb: '0x1800' }))
+)
+---
+
+<script>
+    import Swiper from 'swiper';
+    import { Navigation, Keyboard, EffectFade } from 'swiper/modules';
+    import 'swiper/css';
+    import 'swiper/css/effect-fade';
+
+    const dataElement = document.getElementById('carousel-data');
+    const photos = dataElement ? JSON.parse(dataElement.textContent || '[]') : [];
+    const photoLinksElement = document.getElementById('photo-links-data');
+    const photoLinks = photoLinksElement ? JSON.parse(photoLinksElement.textContent || '[]') : [];
+    const titleEl = document.getElementById('photo-title');
+    const cameraEl = document.getElementById('photo-camera');
+    const filmEl = document.getElementById('photo-film');
+    const locationEl = document.getElementById('photo-location');
+    const currentPosIndicator = document.getElementById('current-pos');
+    const maxPosIndicator = document.getElementById('max-pos');
+
+    if (maxPosIndicator) {
+        maxPosIndicator.innerText = String(photos.length);
+    }
+    if (currentPosIndicator) {
+        currentPosIndicator.innerText = '1';
+    }
+
+
+    const swiper = new Swiper('.swiper', {
+        modules: [Navigation, Keyboard, EffectFade],
+        spaceBetween: 20,
+        effect: 'cards',
+        fadeEffect: {
+            crossFade: true
+        },
+        speed: 250,
+        navigation: {
+            nextEl: '#inc-button',
+            prevEl: '#dec-button',
+        },
+        keyboard: {
+            enabled: true,
+            onlyInViewport: false,
+        },
+        loop: true,
+        on: {
+            slideChange: function() {
+                const realIndex = this.realIndex;
+                const currentPhoto = photos[realIndex];
+                
+                if (currentPosIndicator) {
+                    currentPosIndicator.innerText = String(realIndex + 1);
+                }
+                
+                if (titleEl && currentPhoto) {
+                    titleEl.textContent = currentPhoto.title || "Untitled";
+                }
+                if (cameraEl && currentPhoto) {
+                    cameraEl.textContent = `📸 ${currentPhoto.camera}`;
+                }
+                if (filmEl && currentPhoto) {
+                    filmEl.textContent = currentPhoto.film !== "" ? `🎞️ ${currentPhoto.film}` : "";
+                }
+                if (locationEl && currentPhoto) {
+                    locationEl.textContent = `📌 ${currentPhoto.location}`;
+                }
+            }
+        }
+    });
+</script>
+
+<!-- Hidden element to pass server data to client -->
+<div class="hidden" id="carousel-data">{JSON.stringify(photos)}</div>
+<div class="hidden" id="photo-links-data">{JSON.stringify(photoLinks)}</div>
+
+<div class="swiper w-full h-[70vh] md:h-[calc(100vh-7rem)]">
+    <div class="swiper-wrapper">
+        {photos.map((photo, i) => (
+            <div class="swiper-slide flex items-center justify-center">
+                <img 
+                    src={photoLinks[i]} 
+                    class="w-full h-full object-contain"
+                    loading="lazy"
+                    alt={photo.title || 'Photo'}
+                />
+            </div>
+        ))}
+    </div>
+</div>

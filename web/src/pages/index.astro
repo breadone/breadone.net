@@ -1,0 +1,25 @@
+---
+import Base from "src/layout/Base.astro"
+import RecentPosts from "@components/index/recentPosts"
+import RecentAlbums from "@components/index/recentAlbums"
+
+export const prerender = false
+
+---
+
+<Base>
+	<div slot="sidebar" class="text-left">
+		<p>New website new me!</p> <br>
+
+		<p>This is the third major iteration of the website, and by far the most flexible and best designed (imo!)</p><br>
+
+		<p>I'm... really not sure what else to put on this landing page, make sure to check out some of the photos and posts I've added recently, I've been totally revamping those too and I'm really proud of this batch.</p><br>
+
+		<p>Hope you enjoy your time here :)</p>
+	</div>
+
+	<div slot="content" class="md:py-10 space-y-4">
+		<RecentAlbums/>
+		<RecentPosts/>
+	</div>
+</Base>

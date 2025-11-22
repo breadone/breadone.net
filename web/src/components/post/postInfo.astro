@@ -1,0 +1,25 @@
+---
+import { getFormattedDate } from '@utils/date'
+const { publishDate, wordCount, readTime, tags } = Astro.props
+---
+
+<div class="flex flex-row gap-1">
+    <time datetime={publishDate}>{getFormattedDate(publishDate)}</time>
+    
+    <span class="tag-separator"/>
+    
+    <span title={`${wordCount} words`}>{readTime} min. read</span>
+
+    <span class="tag-separator"/>
+
+    {
+        tags.map((tag, i) => (
+        <>
+        <a class="b1-no-underline" href={`/posts/tag/${tag}/`}>
+            #{tag}
+        </a>
+        {i < tags.length - 1 && ", "}
+        </>
+        ))
+    }
+</div>

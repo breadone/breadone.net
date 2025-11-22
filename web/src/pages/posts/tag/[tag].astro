@@ -1,0 +1,33 @@
+---
+import Base from "@layout/Base"
+import PostCard from '@components/postList/postCard'
+import { authPB } from "@utils/pocketbase"
+export const prerender = false
+
+const { tag } = Astro.params
+const pb = await authPB()
+
+const posts = await pb.collection('posts').getFullList({
+    sort: '-publishDate',
+    filter: `tags ~ "${tag}" && published=true`
+})
+
+const postCount = posts.length
+const plural = postCount === 1 ? "post" : "posts"
+---
+
+<Base>
+
+    <div slot="sidebar">
+        <a href="javascript:history.back()">Back</a>
+
+        <p class="text-xl">{postCount} {plural} with tag <code class="bg-gray-300 py-1 px-2 text-sm rounded-md">{tag}</code></p>
+    </div>
+
+    <div slot="content" class="md:py-12">
+        {
+            posts.map(p => <PostCard p={p}/>)
+        }
+    </div>
+
+</Base>

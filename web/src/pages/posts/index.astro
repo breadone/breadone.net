@@ -1,0 +1,30 @@
+---
+import Base from "src/layout/Base.astro";
+import TagList from "@components/postList/tagList";
+import PostCard from "@components/postList/postCard";
+import { authPB } from "src/utils/pocketbase";
+
+export const prerender = false
+
+const pb = await authPB()
+
+const posts = await pb.collection('posts').getFullList({
+    sort: '-publishDate',
+    filter: 'published=true'
+})
+
+const tags = posts.flatMap(p => p.tags)
+const uniqueTags = tags.filter((v, i, a) => a.indexOf(v) === i)
+---
+
+<Base meta={{title: "posts"}}>
+    <div slot="sidebar" class="text-left">
+        A few thoughts I've had, whenever I feel like it as you can see!
+        
+        <TagList tags={uniqueTags}/>
+    </div>
+    
+    <div slot="content" class="md:py-12">
+        { posts.map(p => <PostCard p={p}/>) }
+    </div>
+</Base>

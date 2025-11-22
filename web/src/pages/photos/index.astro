@@ -1,0 +1,30 @@
+---
+import Base from "src/layout/Base.astro"
+import Carousel from "@components/photos/carousel"
+import { authPB } from 'src/utils/pocketbase'
+
+export const prerender = false
+
+const pb = await authPB()
+const photos = await pb.collection('photos').getFullList({
+    sort: '-created'
+})
+---
+
+<Base meta={{title: "photos"}}>
+    <div slot="sidebar">
+        <p id="photo-title" class="bold text-2xl">{photos[0].title === "" ? "Untitled" : photos[0].title}</p>
+        <p id="photo-camera" class="text-sm">📸 {photos[0].camera}</p>
+        <p id="photo-film" class="text-sm">{photos[0].film !== "" ? `🎞️ ${photos[0].film}` : ""}</p>
+        <p id="photo-location" class="text-sm">📌 {photos[0].location}</p>
+
+        <button id="dec-button" onclick="dec()">&lt;</button>
+        <span id="current-pos" /> of <span id="max-pos" />
+        <button id="inc-button" onclick="inc()">&gt;</button>
+    </div>
+    
+    <div slot="content" class="">
+        <Carousel/>
+    </div>
+    
+</Base>

@@ -1,0 +1,42 @@
+---
+import { calcReadTime } from "@utils/post"
+import { authPB } from "@utils/pocketbase"
+import PostInfo from "@components/post/postInfo"
+
+const pb = await authPB()
+const { p } = Astro.props
+
+const wordCount = p.content.split(' ').length;
+const readTime = calcReadTime(wordCount);
+---
+
+<div class="mb-8 pb-7 md:pb-8 border-b border-gray-200 last:border-b-0 flex flex-col md:flex-row gap-4 md:gap-3">
+    <!-- Text content on left -->
+    <div class="flex-1  flex flex-col justify-start order-2 md:order-1">
+        
+        <a href={`/posts/${p.slug}/`} rel="prefetch" class="no-underline hover:underline">
+            <h2 class="text-xl ">{p.title}</h2>
+        </a>
+        {
+            p.description !== "" &&
+            <p class="line-clamp-3 block italic text-gray-600">{p.description}</p>
+        }
+
+        
+        <PostInfo
+            publishDate={p.publishDate},
+            wordCount={wordCount},
+            readTime={readTime},
+            tags={p.tags}
+        />
+    </div>
+
+    
+    
+    <!-- Image on right -->
+    <div class="md:max-w-1/2 order-1 md:order-2">
+        <a href={`/posts/${p.slug}/`} rel="prefetch">
+            <img src={ pb.files.getURL(p, p.headerImage) } class="rounded-sm w-full h-48 md:h-full object-cover" alt={p['title']}/>
+        </a>
+    </div>
+</div>

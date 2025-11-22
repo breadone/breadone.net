@@ -1,0 +1,57 @@
+---
+import Base from "@layout/Base";
+import PostInfo from "@components/post/postInfo";
+import TableOfContents from "@components/post/toc";
+
+import { calcReadTime } from '@utils/post'
+import { authPB } from "@utils/pocketbase";
+
+const { slug } = Astro.params
+export const prerender = false
+
+const pb = await authPB()
+const post = await pb.collection('posts').getFirstListItem(`slug="${slug}"`)
+
+const { title, content, publishDate, description } = post
+const headerImage = pb.files.getURL(post, post.headerImage)
+
+const wordCount = content.split(' ').length;
+const readTime = calcReadTime(wordCount);
+
+---
+
+<Base meta={{title: "post", description: title, ogImage: headerImage, articleDate: publishDate}}>
+    <div slot="sidebar" class="text-left">
+        <img src={headerImage}/>
+
+        <p class="text-2xl pt-2">{title}</p>
+        <p class="italic">{description}</p>
+        
+        <PostInfo
+            publishDate={publishDate},
+            wordCount={wordCount},
+            readTime={readTime},
+            tags={post.tags}
+        />
+
+        <TableOfContents/>
+
+    </div>
+
+    <div id="post-content" slot="content" class="md:py-12">
+        <Fragment set:html={content} />
+    </div>
+
+    <style is:global>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        #post-content img {
+            width: 90%;
+            margin-inline: auto;
+            display: block;
+        }
+    </style>
+
+</Base>

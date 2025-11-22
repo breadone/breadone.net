@@ -1,0 +1,37 @@
+---
+import Base from "@layout/Base";
+import { authPB } from "@utils/pocketbase";
+import { getFormattedDate } from '@utils/date'
+export const prerender = false
+
+const pb = await authPB()
+
+const records = await pb.collection('now').getFullList({
+    sort: '-updated'
+})
+
+const lastUpdated = getFormattedDate(records[0].updated)
+---
+
+<Base meta={{title: "now"}}>
+
+    <div slot="sidebar" class="text-left">
+        <h2>The Now!</h2>
+        <p>Trying out a <a href="https://nownownow.com/about">Now Page</a>, inspired by some other personal sites such as <a href="https://lai.nz">this great one.</a></p><br>
+
+        <p>I'll update this every now and then; the gist is "this is what you would tell someone that you haven't seem in a year, what you've been up to". Love that concept!</p>
+    </div>
+
+    <div slot="content" class="">
+        <p class="mb-1 md:mt-5 italic ">Last Updated: {lastUpdated}</p>
+        {
+            records.map(r => (
+                <div class="mb-3">
+                    <h3>{r.heading}</h3>
+                    <Fragment set:html={r.content}/>
+                </div>
+            ))
+        }
+    </div>
+
+</Base>

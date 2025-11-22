@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  @font-face {
+    font-family: Barnum;
+    font-style: normal;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("/fonts/barnum-roman.ttf");
+  }
+  
+  @font-face {
+    font-family: Warbler;
+    font-style: normal;
+    font-weight: 200 700;
+    font-display: swap;
+    src: url("/fonts/warbler-var.woff2");
+  }
+  
+  :root {
+    --bg-light: #f4f4f9;
+    --accent: #F9DC5C;
+  }
+  
+  html {
+    overflow-y: scroll;
+  }
+  
+  html body {
+    @apply font-[Georgia];
+    @apply w-full md:w-[68%] mx-auto h-full;
+    @apply bg-(--bg-light);
+  }
+  
+  .b1-no-underline {
+    @apply no-underline hover:underline;
+    @apply decoration-(--accent);
+  }
+  
+  a {
+    @apply text-black underline decoration-black;
+    @apply hover:decoration-(--accent);
+  }
+  
+  h1 {
+    font-size: 28px;
+    @apply py-4;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+}
+
+.tag-separator {
+  @apply border-l border-gray-400;
+}
+
+.content-panel {
+  @apply w-full md:w-[68%] py-8 md:py-14 px-6 md:pl-10 md:pr-0;
+}
+
+@tailwind utilities;

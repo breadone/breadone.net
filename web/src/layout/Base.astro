@@ -1,0 +1,52 @@
+---
+import BaseHead from "./BaseHead.astro"
+import Sidebar from "@components/sidebar"
+import Navbar from "@components/index/navbar"
+import Footer from "@components/footer"
+
+const {
+    meta = {}
+} = Astro.props;
+
+const {
+    title = "",
+    description = "",
+    ogImage = "",
+    articleDate = ""
+} = meta;
+---
+
+<html>
+<head>
+    <BaseHead
+        title={title}
+        description={description}
+        ogImage={ogImage}
+        articleDate={articleDate}
+    />
+    
+</head>
+
+<body>
+    <main id="main" class="flex flex-col md:flex-row min-h-screen">
+        <div class="w-full md:w-[32%] md:sticky md:top-0 pt-8 md:py-14 md:h-screen text-center flex flex-col px-6 md:px-0">
+            <Sidebar>
+                <slot name="sidebar" />
+            </Sidebar>
+            
+            <div class="hidden md:block md:mt-auto">
+                <Footer/>
+            </div>
+        </div>
+        
+        <div class="content-panel">
+            <slot name="content"/>
+        </div>
+        
+        <div class="block md:hidden mt-auto px-6 pb-8 text-center">
+            <Footer/>
+        </div>
+
+    </main>
+</body>
+</html>
