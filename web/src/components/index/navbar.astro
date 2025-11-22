@@ -1,0 +1,31 @@
+---
+const links = [
+    {
+        txt: 'now',
+        lnk: '/now'
+    },
+    // {
+    //     txt: 'photos',
+    //     lnk: '/photos'
+    // },
+    {
+        txt: 'albums',
+        lnk: '/albums'
+    },
+    {
+        txt: 'posts',
+        lnk: '/posts'
+    },
+]
+---
+
+<div class="text-2xl">
+    {
+        links.map((l, i) => (
+            <>
+                <a class="b1-no-underline" href={l.lnk}>{l.txt}</a>
+                {i < links.length - 1 && <span class="text-(--accent)"> • </span>}
+            </>
+        ))
+    }
+</div>

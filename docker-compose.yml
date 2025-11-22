@@ -1,0 +1,17 @@
+services:
+  web:
+    build: web
+    env_file: .env
+    ports:
+      - "4321:4321"
+
+  pb:
+    build: pb
+    env_file: .env
+    volumes:
+      - ./pb/pb_data:/pb/pb_data
+      - ./pb/pb_migrations:/pb/pb_migrations
+      - ./pb/pb_hooks:/pb/pb_hooks
+    ports:
+      - "8090:8090"
+

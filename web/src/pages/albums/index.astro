@@ -1,0 +1,49 @@
+---
+import Base from "@layout/Base";
+import { authPB } from "@utils/pocketbase";
+import AlbumCard from "@components/albums/albumCard";
+export const prerender = false
+
+const pb = await authPB()
+
+const albums = await pb.collection('albums').getFullList({
+    sort: '-created'
+})
+---
+
+<script>
+    import Swiper from "swiper";
+    import { Keyboard } from 'swiper/modules';
+    import 'swiper/css';
+
+    const s = new Swiper('.swiper-album', {
+            modules: [Keyboard],
+            slidesPerView: 1,
+            spaceBetween: 0,
+            speed: 400,
+            loop: true,
+            keyboard: {
+                enabled: true,
+                onlyInViewport: false,
+            }
+        }
+    )
+</script>
+
+
+<Base meta={{title: "albums"}}>
+    <div slot="sidebar">
+        <p class="text-left"> More focused, themed collections of photos compared to the more miscellaneous images of the (now defunct) <a href="/photos">photos page.</a> Best viewed on a large screen!</p>
+        <!-- <br>
+        ← / → -->
+    </div>
+
+    <div slot="content">
+        <div class=" w-full">
+            <div class="">
+                { albums.map(a =>  <AlbumCard a={a}/> ) }
+            </div>
+        </div>
+    </div>
+    
+</Base>

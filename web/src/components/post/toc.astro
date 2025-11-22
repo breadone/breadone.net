@@ -1,0 +1,57 @@
+---
+
+---
+
+<div id="toc-container" class="hidden">
+    <p class="text-lg mt-4">Table of Contents</p>
+    <ul id="toc" class="text-md">
+        <a href="#" class="b1-no-underline ml-3">[top]</a>
+    </ul>
+</div>
+
+<script>
+    function addLink(tag: Element, depth: number) {
+        let lnk = document.createElement('a')
+        lnk.href=`#${tag.id}`
+        lnk.className = 'b1-no-underline'
+        lnk.innerHTML = `<span class="mr-1">${"#".repeat(depth)}</span>${tag.innerHTML}`
+        
+        // Add smooth scroll with offset
+        lnk.addEventListener('click', (e) => {
+            e.preventDefault()
+            const target = document.getElementById(tag.id)
+            if (target) {
+                const offset = 20 // pixels from top
+                const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                })
+            }
+        })
+
+        let li = document.createElement('li')
+        li.className = 'line-clamp-1'
+        li.appendChild(lnk)
+
+        toc?.appendChild(li)
+    }
+
+    // get all titles in the page
+    const titles = document.querySelectorAll('h1, h2, h3')
+    const toc = document.getElementById('toc') as Element
+    const toc_cnt = document.getElementById('toc-container') as Element
+
+    if (titles.length > 0) {
+        toc_cnt.classList.add('lg:block')
+    }
+
+    for (let i = 0; i < titles.length; i++) {
+        const t = titles[i] as Element
+
+        // Assign IDs in case they haven't been (by me)
+        t.id = t.innerHTML
+        let depth = t.tagName.substring(1) as number
+        addLink(t, depth)
+    }
+</script>

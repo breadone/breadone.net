@@ -1,0 +1,35 @@
+---
+const links = [
+    {
+        txt: "src",
+        lnk: "https://github.com/breadone/breadone.net"
+    },
+    {
+        txt: "bsky",
+        lnk: "https://bsky.app/profile/breadone.xyz"
+    },
+    {
+        txt: "email",
+        lnk: "mailto:contact@breadone.net"
+    },
+    // {
+    //     txt: "about",
+    //     lnk: "/about"
+    // },
+    // {
+    //     txt: "copyright",
+    //     lnk: "/copyright"
+    // }
+]
+---
+
+<footer class="text-lg mt-auto">
+    {
+        links.map((l, i) => (
+            <>
+                <a class="b1-no-underline" href={l.lnk}>{l.txt}</a>
+                {i < links.length - 1 && <span class="text-(--accent)"> | </span>}
+            </>
+        ))
+    }
+</footer>

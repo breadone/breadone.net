@@ -1,0 +1,21 @@
+---
+const { tags } = Astro.props
+---
+
+<p class="text-xl mt-4">Tags</p>
+{
+    tags.length && (
+    <ul class="flex flex-wrap gap-2">
+        {tags.map(tag => (
+            <li>
+                <a
+                href={`/posts/tag/${tag}/`}
+                aria-label={`View all posts with the tag: ${tag}`}
+                >
+                #{tag}
+            </a>
+        </li>
+        ))}
+    </ul>
+    )
+}

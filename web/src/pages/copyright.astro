@@ -1,0 +1,23 @@
+---
+import Base from "src/layout/Base.astro"
+import Sidebar from "src/components/sidebar.astro"
+---
+
+<Base meta={{title: "copyright"}}>
+    <div slot="content">
+        <p class="text-xl">Copyright & License</p>
+			
+			<p>© 2023-{new Date().getFullYear()} breadone.net. All Rights Reserved.</p>
+			
+			<p>
+				All content on this website, including but not limited to text, images, 
+				photographs, and code, is protected by copyright law. No part of this 
+				website may be reproduced, distributed, or transmitted in any form or 
+				by any means without the prior written permission of the author.
+			</p>
+			<br>
+			<p>
+				For permission requests, please <a href="mailto:contact@breadone.net">email</a> me.
+            </p>
+    </div>
+</Base>
