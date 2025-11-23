@@ -1,11 +1,14 @@
 ---
 import Base from "@layout/Base";
 import { authPB } from "@utils/pocketbase";
+import { getFormattedDate } from "@utils/date";
 export const prerender = false
 
 const { title } = Astro.params
+const filter = `title ~ "${decodeURI(title!)}" || slug ~ "${title}"`
+
 const pb = await authPB()
-const album = await pb.collection('albums').getFirstListItem(`title ~ "${decodeURI(title!)}"`)
+const album = await pb.collection('albums').getFirstListItem(filter)
 const images = await Promise.all(
     album.images.map(i => pb.files.getURL(album, i))
 )
@@ -13,9 +16,9 @@ const images = await Promise.all(
 
 <Base meta={{title: "album", description: album.title, ogImage: images[0]}}>
 
-    <div slot="sidebar">
+        <div slot="sidebar">
         <h1>{album.title}</h1>
-        <p>{album.date}</p>
+        <p>{ getFormattedDate(album.date, { month: "long", year: "numeric" }) }</p>
         <p>{album.location}</p><br>
 
         <Fragment set:html={album.remarks}/>

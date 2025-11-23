@@ -1,13 +1,14 @@
 ---
 import { authPB } from "@utils/pocketbase"
+import { getFormattedDate } from "@utils/date"
 const { a } = Astro.props
 const pb = await authPB()
 ---
 
 <div class="swiper-slide flex flex-col md:flex-row items-center justify-center">
-    <a class="b1-no-underline" href={`/albums/${encodeURI(a.title)}`}>
+    <a class="b1-no-underline" href={`/albums/${a.slug}`}>
         <h1 class="text-center pb-0">{a.title}</h1>
-        <p class="text-center pb-3">{a.date}</p>
+        <p class="text-center pb-3">{ getFormattedDate(a.date, { month: "long", year: "numeric" }) }</p>
         <img 
             src={pb.files.getURL(a, a.images[0])} 
             class="w-full max-h-[70vh] pb-4 object-cover"
