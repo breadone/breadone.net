@@ -20,7 +20,7 @@ const postImages = await Promise.all( albums.items.map(a => pb.files.getURL(a, a
         {
             albums.items.map((p, i) => (
             <div class="flex md:flex-col flex-row gap-3 md:gap-2 flex-1">
-                <a href={`/albums/${encodeURI(p.title)}`} class="shrink-0">
+                <a href={`/albums/${p.slug}`} class="shrink-0">
                     <img class="w-24 h-24 md:w-full md:h-48 object-cover rounded-sm" src={postImages[i]} alt={p.title}/>
                 </a>
 
