@@ -4,8 +4,7 @@ interface SiteConfig {
 	description: string;
 	lang: string;
 	ogLocale: string;
-	themeColorLight: string;
-	themeColorDark: string;
+	themeColour: string;
 }
 
 export const siteConfig: SiteConfig = {
@@ -14,6 +13,5 @@ export const siteConfig: SiteConfig = {
 	description: "Tha Breadsite",
 	lang: "en-GB",
 	ogLocale: "en_GB",
-	themeColorLight: "#f4f4f9",
-	themeColorDark: "#1d1f21",
+	themeColour: "#F9DC5C",
 };
