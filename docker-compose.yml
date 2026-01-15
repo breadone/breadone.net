@@ -1,7 +1,12 @@
 services:
   web:
-    build: web
-    env_file: .env
+    build:
+      context: web
+      args:
+        - PUBLIC_PB_URL=${PUBLIC_PB_URL}
+        - PB_EMAIL=${PB_EMAIL}
+        - PB_PW=${PB_PW}
+    env_file: .env    
     ports:
       - "4321:4321"
 

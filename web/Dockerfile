@@ -3,8 +3,10 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm i
 COPY . .
-ENV PUBLIC_PB_URL=http://pb:8080
-ENV PUBLIC_URL=http://localhost:4321
+
+ARG PUBLIC_PB_URL
+ARG PB_EMAIL
+ARG PB_PW
 
 RUN npm run build
 
