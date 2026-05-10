@@ -4,7 +4,6 @@ on:
   push:
     tags:
       - "v*"
-  workflow_dispatch:
 
 env:
   REGISTRY: git.bread.one
@@ -35,3 +34,7 @@ jobs:
           push: true
           tags: |
             ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ gitea.ref_name }}
+          build-args: |
+            PUBLIC_PB_URL=${{ secrets.PUBLIC_PB_URL }}
+            PB_EMAIL=${{ secrets.PB_EMAIL }}
+            PB_PW=${{ secrets.PB_PW }}
