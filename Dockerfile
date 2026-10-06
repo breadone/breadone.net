@@ -4,6 +4,10 @@ COPY package*.json ./
 RUN npm i
 COPY . .
 
+VOLUME [ "/photos" ]
+
+ENV ALBUM=/album
+
 # ARG PUBLIC_PB_URL
 # ARG PB_EMAIL
 # ARG PB_PW
