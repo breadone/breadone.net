@@ -1,37 +1,38 @@
 ---
-import Base from "src/layout/Base.astro"
+import Base from "src/layout/Base.astro";
 
 import { authPB } from "@utils/pocketbase";
 import AlbumCard from "@components/albums/albumCard";
 
-const pb = await authPB()
+const pb = await authPB();
 
-const albums = await pb.collection('albums').getFullList({
-    sort: '-date'
-})
+const albums = await pb.collection("albums").getFullList({
+    sort: "-date",
+});
 
-export const prerender = false
+export const prerender = false;
 ---
 
 <Base>
-    <div slot="sidebar" class="text-left">
-        <p>New website new me!</p> <br>
+    <div slot="sidebar" class="text-center">
+        <p>I finally made a portfolio site</p>
+        <br />
 
-        <p>This is the third major iteration of the website, and by far the most flexible and best designed (imo!)</p><br>
-
-        <p>I'm... really not sure what else to put on this landing page, make sure to check out some of the photos and posts I've added recently, I've been totally revamping those too and I'm really proud of this batch.</p><br>
+        <p>Now just to keep it updated.</p>
+        <br />
 
         <p>Hope you enjoy your time here :)</p>
     </div>
 
     <div slot="content" class="md:py-10 space-y-4">
         <div slot="content">
-            <div class=" w-full">
+            <div class="w-full">
                 <div class="">
-                    { albums.map(a =>  <AlbumCard a={a}/> ) }
+                    {albums.map((a) => (
+                        <AlbumCard a={a} />
+                    ))}
                 </div>
             </div>
         </div>
     </div>
-
 </Base>
