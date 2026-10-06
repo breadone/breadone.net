@@ -25,13 +25,11 @@ export const prerender = false;
     </div>
 
     <div slot="content" class="md:py-10 space-y-4">
-        <div slot="content">
-            <div class="w-full">
-                <div class="">
-                    {albums.map((a) => (
-                        <AlbumCard a={a} />
-                    ))}
-                </div>
+        <div class="w-full">
+            <div class="">
+                {albums.map((a) => (
+                    <AlbumCard a={a} />
+                ))}
             </div>
         </div>
     </div>
