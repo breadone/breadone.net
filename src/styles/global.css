@@ -28,7 +28,7 @@
   
   html body {
     @apply font-[Georgia];
-    @apply w-full md:w-[68%] mx-auto h-full;
+    @apply w-full md:w-[68%] 2xl:w-[50%] mx-auto h-full;
     @apply bg-(--bg-light);
   }
   
