@@ -11,7 +11,7 @@ const album = defineCollection({
     pubDate: z.coerce.date(),
     location: z.string(),
     remarks: z.string(),
-    images: z.array(z.string()),
+    imageFolder: z.string(),
   }),
 });
 
