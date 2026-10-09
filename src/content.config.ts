@@ -1,18 +1,23 @@
 import { defineCollection } from "astro:content";
-import { file } from "astro/loaders";
+import { file, glob } from "astro/loaders";
 import { z } from "astro/zod";
 
-// 4. Define a `loader` and `schema` for each collection
-const album = defineCollection({
-  loader: file(`${import.meta.env.ALBUM}/_collection.json`),
+const albums = defineCollection({
+  loader: glob({ pattern: '**/*.json', base: './src/content/albums' }),
   schema: z.object({
     title: z.string(),
-    slug: z.string(),
-    pubDate: z.coerce.date(),
-    location: z.string(),
     remarks: z.string(),
-    imageFolder: z.string(),
-  }),
+    pubDate: z.coerce.date(),
+    slug: z.string(),
+    location: z.string(),
+    photos: z.array(
+      z.object({
+        id: z.string(),
+        key: z.string(),
+      })
+    )
+  })
 });
+
 
 export const collections = { album };
