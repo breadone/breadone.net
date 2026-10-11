@@ -1,7 +1,7 @@
 ---
 import Base from "@layout/Base";
 import { getFormattedDate } from "@utils/date";
-import { getEntry, getCollection } from "astro:content";
+import { getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
 import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -43,6 +43,8 @@ const images = await Promise.all(
 );
 
 const ogImage = images.length > 0 ? images[0] : undefined;
+
+const { Content } = await render(album);
 ---
 
 <Base meta={{ title: album.data.title, description: album.data.remarks, ogImage }}>
@@ -54,8 +56,9 @@ const ogImage = images.length > 0 ? images[0] : undefined;
         <p>{album.data.location}</p><br>
 
         {/* Set raw HTML safely if your content markdown/json contains HTML strings */}
-        <Fragment set:html={album.data.remarks}/>
-        {JSON.stringify(album)}
+        <!-- <Fragment set:html={album.data.remarks}/> -->
+
+        <Content />
     </div>
 
     <div slot="content">

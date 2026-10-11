@@ -6,4 +6,5 @@ location: "Gibbs Farm, New Zealand"
 
 First time shooting B&W. These are are a mix from my Fuji X-T3 and Ricoh KR-10 using Delta 3200.
 
+
 Absolutely adore how these turned out, the whole place already looks like an alien planet but the monochrome accentuates it that much more.

@@ -66,7 +66,7 @@ export function imgLoader(): Loader {
         // 4. Assemble standard schema properties directly out of the markdown/json files
         const rawAlbumData = {
           title: metadata.title || slug,
-          remarks: parsed.data || '',
+          remarks: parsed.content || '',
           pubDate: metadata.pubDate ? new Date(metadata.pubDate) : new Date(),
           location: metadata.location || '',
           s3key: slug,
