@@ -55,6 +55,7 @@ const ogImage = images.length > 0 ? images[0] : undefined;
 
         {/* Set raw HTML safely if your content markdown/json contains HTML strings */}
         <Fragment set:html={album.data.remarks}/>
+        {JSON.stringify(album)}
     </div>
 
     <div slot="content">

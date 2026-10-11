@@ -7,7 +7,6 @@ const albums = defineCollection({
   loader: imgLoader(),
   schema: z.object({
     title: z.string(),
-    remarks: z.string(),
     pubDate: z.coerce.date(),
     location: z.string(),
     photos: z.array(

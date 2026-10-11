@@ -50,7 +50,8 @@ export function imgLoader(): Loader {
         const filePath = path.join(contentDir, file);
         const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-        let metadata: any = JSON.parse(fileContent);
+        const parsed = matter(fileContent);
+        const metadata = parsed.data;
 
         // 3. Grab matching photos from S3 registry, fallback to empty array if no folder found
         const photoKeys = s3Albums[slug] || [];
@@ -65,7 +66,7 @@ export function imgLoader(): Loader {
         // 4. Assemble standard schema properties directly out of the markdown/json files
         const rawAlbumData = {
           title: metadata.title || slug,
-          remarks: metadata.remarks || '',
+          remarks: parsed.data || '',
           pubDate: metadata.pubDate ? new Date(metadata.pubDate) : new Date(),
           location: metadata.location || '',
           s3key: slug,
