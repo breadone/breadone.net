@@ -1,16 +1,32 @@
 {
   "extends": "astro/tsconfigs/strict",
-  "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist"],
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
   "compilerOptions": {
     "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
     "paths": {
-      "@components/*": ["src/components/*.astro"],
-			"@layout/*": ["src/layout/*.astro"],
-			"@styles/*": ["src/styles/*.css"],
-      "@utils/*": ["src/utils/*.ts"]
+      "@components/*": [
+        "src/components/*.astro"
+      ],
+      "@layout/*": [
+        "src/layout/*.astro"
+      ],
+      "@styles/*": [
+        "src/styles/*.css"
+      ],
+      "@utils/*": [
+        "src/utils/*.ts"
+      ]
     },
-    "moduleResolution": "node",
-    "types": ["node"]
+    "moduleResolution": "bundler",
+    "types": [
+      "node"
+    ]
   }
 }

@@ -3,74 +3,56 @@ import Base from "@layout/Base";
 import { getFormattedDate } from "@utils/date";
 import { getEntry, render } from "astro:content";
 import { Image } from "astro:assets";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getSignedS3ObjectUrl } from "@utils/s3";
 
 export const prerender = false;
 const { slug } = Astro.params;
 
 if (!slug) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
 const album = await getEntry("albums", slug);
 
 if (!album) {
-  return Astro.redirect('/404');
+  return Astro.redirect("/404");
 }
 
-const s3 = new S3Client({
-  region: import.meta.env.AWS_REGION || 'ap-southeast-2',
-  credentials: {
-    accessKeyId: import.meta.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.AWS_SECRET_ACCESS_KEY,
-  },
-});
-
-const BUCKET_NAME = import.meta.env.S3_BUCKET_NAME;
-
-// Map photo IDs while ensuring clean single slashes
 const images = await Promise.all(
-  album.data.photos.map(async (photo) => {
-    const command = new GetObjectCommand({
-      Bucket: BUCKET_NAME,
-      Key: photo.id,
-    });
-    
-    // Expires in 1 hour (3600 seconds)
-    return await getSignedUrl(s3, command, { expiresIn: 3600 });
-  })
+  album.data.photos.map((photo: { id: string }) =>
+    getSignedS3ObjectUrl(photo.id),
+  ),
 );
 
 const ogImage = images.length > 0 ? images[0] : undefined;
 
-const { Content } = await render(album);
+const description = album.data.remarks ?? album.data.title;
+const Content = (await render(album)).Content;
 ---
 
-<Base meta={{ title: album.data.title, description: album.data.remarks, ogImage }}>
+<Base meta={{ title: album.data.title, description, ogImage }}>
+  <div slot="sidebar">
+    <h1>{album.data.title}</h1>
+    <p>
+      {getFormattedDate(album.data.pubDate, { month: "long", year: "numeric" })}
+    </p>
+    <p>{album.data.location}</p><br />
 
-    <div slot="sidebar">
-        <h1>{album.data.title}</h1>
-        <!-- Pass the date directly from your frontmatter/content configuration -->
-        <p>{ getFormattedDate(album.data.pubDate, { month: "long", year: "numeric" }) }</p>
-        <p>{album.data.location}</p><br>
+    {Content ? <Content /> : description && <p>{description}</p>}
+  </div>
 
-        {/* Set raw HTML safely if your content markdown/json contains HTML strings */}
-        <!-- <Fragment set:html={album.data.remarks}/> -->
-
-        <Content />
-    </div>
-
-    <div slot="content">
-        { images.map(img =>  
-            <Image 
-                class="pb-2 w-full h-auto" 
-                src={img} 
-                alt={`${album.data.title} photograph`}
-                width={1200}
-                height={800}
-                format="webp"
-            /> 
-        )}
-    </div>
+  <div slot="content">
+    {
+      images.map((img) => (
+        <Image
+          class="pb-2 w-full h-auto"
+          src={img}
+          alt={`${album.data.title} photograph`}
+          width={1200}
+          height={800}
+          format="jpg"
+        />
+      ))
+    }
+  </div>
 </Base>

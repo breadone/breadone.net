@@ -1,32 +1,15 @@
 ---
 import { getFormattedDate } from "@utils/date";
 import { Image } from "astro:assets";
-import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
-import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getSignedS3ObjectUrl } from "@utils/s3";
 
 const { album } = Astro.props;
-
-const s3 = new S3Client({
-  region: import.meta.env.AWS_REGION || "ap-southeast-2",
-  credentials: {
-    accessKeyId: import.meta.env.AWS_ACCESS_KEY_ID,
-    secretAccessKey: import.meta.env.AWS_SECRET_ACCESS_KEY,
-  },
-});
-
-const BUCKET_NAME = import.meta.env.S3_BUCKET_NAME;
 
 const coverPhoto = album.data.photos[0];
 let coverUrl = "";
 
 if (coverPhoto) {
-  const command = new GetObjectCommand({
-    Bucket: BUCKET_NAME,
-    Key: coverPhoto.id,
-  });
-
-  // Create short-lived thumbnail signatures (Expires in 1 hour)
-  coverUrl = await getSignedUrl(s3, command, { expiresIn: 3600 });
+  coverUrl = await getSignedS3ObjectUrl(coverPhoto.id);
 }
 ---
 
@@ -37,13 +20,17 @@ if (coverPhoto) {
       {getFormattedDate(album.data.pubDate, { month: "long", year: "numeric" })}
     </p>
 
-    <Image
-      src={coverUrl}
-      class="w-full max-h-[70vh] pb-4 object-cover"
-      alt={`Cover photo for ${album.data.title}`}
-      width={1200}
-      height={800}
-      format="webp"
-    />
+    {
+      coverUrl && (
+        <Image
+          src={coverUrl}
+          class="w-full max-h-[70vh] pb-4 object-cover"
+          alt={`Cover photo for ${album.data.title}`}
+          width={1200}
+          height={800}
+          format="webp"
+        />
+      )
+    }
   </a>
 </div>
