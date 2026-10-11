@@ -10,7 +10,6 @@ const albums = defineCollection({
     remarks: z.string(),
     pubDate: z.coerce.date(),
     location: z.string(),
-    s3key: z.string(),
     photos: z.array(
       z.object({
         id: z.string(),
