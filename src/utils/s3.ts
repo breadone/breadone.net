@@ -1,10 +1,12 @@
 import { GetObjectCommand, ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
-const region = import.meta.env.AWS_REGION || "ap-southeast-2";
+import { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME } from 'astro:env/server'
+
+const region = AWS_REGION || "ap-southeast-2";
 
 function getBucketName() {
-    const bucketName = import.meta.env.S3_BUCKET_NAME;
+    const bucketName = S3_BUCKET_NAME;
 
     if (!bucketName) {
         throw new Error("S3_BUCKET_NAME is not set");
@@ -16,8 +18,8 @@ function getBucketName() {
 export const s3Client = new S3Client({
     region,
     credentials: {
-        accessKeyId: import.meta.env.AWS_ACCESS_KEY_ID,
-        secretAccessKey: import.meta.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: AWS_ACCESS_KEY_ID,
+        secretAccessKey: AWS_SECRET_ACCESS_KEY,
     },
 });
 
