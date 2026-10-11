@@ -27,12 +27,7 @@ const s3 = new S3Client({
   },
 });
 
-
 const BUCKET_NAME = import.meta.env.S3_BUCKET_NAME;
-const REGION = import.meta.env.AWS_REGION || 'ap-southeast-2';
-
-// Clean AWS S3 standard endpoint formatting
-const S3_BASE_URL = `https://${BUCKET_NAME}.s3.${REGION}.amazonaws.com`;
 
 // Map photo IDs while ensuring clean single slashes
 const images = await Promise.all(
