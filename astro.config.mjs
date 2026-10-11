@@ -1,5 +1,5 @@
 // @ts-check
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import node from "@astrojs/node";
@@ -9,10 +9,14 @@ export default defineConfig({
   site: "https://breadone.net",
 
   vite: {
-      plugins:[ tailwindcss() ]
+    plugins: [tailwindcss()],
   },
 
-  // adapter: node({
-  //   mode: "standalone"
-  // })
+  adapter: node({
+    mode: "standalone",
+  }),
+
+  image: {
+    domains: ["*amazonaws.com"],
+  },
 });
