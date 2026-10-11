@@ -1,9 +1,8 @@
 import type { Loader } from 'astro/loaders';
-import { z } from 'astro/zod';
 import { S3Client, ListObjectsV2Command } from '@aws-sdk/client-s3';
 import fs from 'node:fs';
 import path from 'node:path';
-import matter from 'gray-matter'; // Standard markdown parser Astro uses under the hood
+import matter from 'gray-matter';
 
 const s3 = new S3Client({
   region: import.meta.env.AWS_REGION || 'ap-southeast-2',
@@ -46,21 +45,12 @@ export function imgLoader(): Loader {
 
       for (const file of files) {
         const ext = path.extname(file);
-        if (ext !== '.md' && ext !== '.json') continue;
 
         const slug = path.basename(file, ext);
         const filePath = path.join(contentDir, file);
         const fileContent = fs.readFileSync(filePath, 'utf-8');
 
-        let metadata: any = {};
-
-        // Parse content definitions dynamically based on file type
-        if (ext === '.md') {
-          const parsed = matter(fileContent);
-          metadata = parsed.data;
-        } else if (ext === '.json') {
-          metadata = JSON.parse(fileContent);
-        }
+        let metadata: any = JSON.parse(fileContent);
 
         // 3. Grab matching photos from S3 registry, fallback to empty array if no folder found
         const photoKeys = s3Albums[slug] || [];
