@@ -77,7 +77,7 @@ export function imgLoader(): Loader {
           title: metadata.title || slug,
           remarks: metadata.remarks || '',
           pubDate: metadata.pubDate ? new Date(metadata.pubDate) : new Date(),
-          location: metadata.location || 'Unknown',
+          location: metadata.location || '',
           s3key: slug,
           photos: photoKeys.map((key) => ({ id: key }))
         };

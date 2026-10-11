@@ -9,6 +9,8 @@
 			"@layout/*": ["src/layout/*.astro"],
 			"@styles/*": ["src/styles/*.css"],
       "@utils/*": ["src/utils/*.ts"]
-    }
+    },
+    "moduleResolution": "node",
+    "types": ["node"]
   }
 }
