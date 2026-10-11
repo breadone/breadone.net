@@ -12,6 +12,7 @@
     "@astrojs/node": "^9.5.1",
     "@aws-sdk/client-s3": "^3.1149.0",
     "@aws-sdk/credential-providers": "^3.1149.0",
+    "@aws-sdk/s3-request-presigner": "^3.1149.0",
     "@tailwindcss/vite": "^4.1.18",
     "astro": "^5.16.9",
     "gray-matter": "^4.0.3",
