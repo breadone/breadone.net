@@ -1,0 +1,32 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": [
+    ".astro/types.d.ts",
+    "**/*"
+  ],
+  "exclude": [
+    "dist"
+  ],
+  "compilerOptions": {
+    "baseUrl": ".",
+    "ignoreDeprecations": "6.0",
+    "paths": {
+      "@components/*": [
+        "src/components/*.astro"
+      ],
+      "@layout/*": [
+        "src/layout/*.astro"
+      ],
+      "@styles/*": [
+        "src/styles/*.css"
+      ],
+      "@utils/*": [
+        "src/utils/*.ts"
+      ]
+    },
+    "moduleResolution": "bundler",
+    "types": [
+      "node"
+    ]
+  }
+}

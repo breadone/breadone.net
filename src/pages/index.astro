@@ -1,0 +1,31 @@
+---
+import Base from "src/layout/Base.astro";
+import AlbumCard from "@components/albums/albumCard"; // Ensure path matches .astro suffix
+import { getCollection } from "astro:content";
+
+// 1. Fetch your S3-connected albums from content collections
+const albums = await getCollection("albums");
+
+// 2. Sort albums by publication date descending (newest first)
+albums.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+
+export const prerender = false;
+---
+
+<Base>
+    <div slot="sidebar" class="text-center">
+        <p>I finally made a portfolio site</p>
+        <br />
+        <p>Now just to keep it updated.</p>
+        <br />
+        <p>Hope you enjoy your time here :)</p>
+    </div>
+
+    <div slot="content" class="md:py-10 space-y-4">
+        <div class="w-full">
+            <div>
+                {albums.map((album) => <AlbumCard album={album} />)}
+            </div>
+        </div>
+    </div>
+</Base>
