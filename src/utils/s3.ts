@@ -1,30 +1,62 @@
 import { GetObjectCommand, ListObjectsV2Command, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
+import { getSecret } from "astro:env/server";
 
-import { AWS_REGION, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, S3_BUCKET_NAME } from 'astro:env/server'
+const defaultRegion = "ap-southeast-2";
+// const requiredConfigKeys = ["S3_BUCKET_NAME", "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"] as const;
 
-const region = AWS_REGION || "ap-southeast-2";
+let s3Client: S3Client | undefined;
 
-function getBucketName() {
-    const bucketName = S3_BUCKET_NAME;
+function getS3Config() {
+    const bucketName = getSecret("S3_BUCKET_NAME");
+    const accessKeyId = getSecret("AWS_ACCESS_KEY_ID");
+    const secretAccessKey = getSecret("AWS_SECRET_ACCESS_KEY");
+    const region = getSecret("AWS_REGION") || defaultRegion;
 
-    if (!bucketName) {
-        throw new Error("S3_BUCKET_NAME is not set");
-    }
-
-    return bucketName;
+    return {
+        bucketName,
+        region,
+        accessKeyId,
+        secretAccessKey,
+    };
 }
 
-export const s3Client = new S3Client({
-    region,
-    credentials: {
-        accessKeyId: AWS_ACCESS_KEY_ID,
-        secretAccessKey: AWS_SECRET_ACCESS_KEY,
-    },
-});
+function getS3Client() {
+    if (!s3Client) {
+        const config = getS3Config();
+
+        if (!config) {
+            return undefined;
+        }
+
+        const { region, accessKeyId, secretAccessKey } = config;
+
+        s3Client = new S3Client({
+            region,
+            credentials: {
+                accessKeyId,
+                secretAccessKey,
+            },
+        });
+    }
+
+    return s3Client;
+}
 
 export async function listAlbumObjectKeys(albumSlug: string) {
-    const bucketName = getBucketName();
+    const config = getS3Config();
+
+    if (!config) {
+        return [];
+    }
+
+    const { bucketName } = config;
+    const s3Client = getS3Client();
+
+    if (!s3Client) {
+        return [];
+    }
+
     const keys: string[] = [];
     let continuationToken: string | undefined;
     const prefix = `${albumSlug}/`;
@@ -51,7 +83,18 @@ export async function listAlbumObjectKeys(albumSlug: string) {
 }
 
 export async function getSignedS3ObjectUrl(key: string, expiresIn = 3600) {
-    const bucketName = getBucketName();
+    const config = getS3Config();
+
+    if (!config) {
+        throw new Error("S3 is not configured");
+    }
+
+    const { bucketName } = config;
+    const s3Client = getS3Client();
+
+    if (!s3Client) {
+        throw new Error("S3 is not configured");
+    }
 
     return getSignedUrl(
         s3Client,

@@ -1,15 +1,15 @@
 ---
 import { getFormattedDate } from "@utils/date";
 import { Image } from "astro:assets";
-import { getSignedS3ObjectUrl } from "@utils/s3";
+import { getSignedS3ObjectUrl, listAlbumObjectKeys } from "@utils/s3";
 
 const { album } = Astro.props;
 
-const coverPhoto = album.data.photos[0];
+const [coverPhoto] = await listAlbumObjectKeys(album.id);
 let coverUrl = "";
 
 if (coverPhoto) {
-  coverUrl = await getSignedS3ObjectUrl(coverPhoto.id);
+  coverUrl = await getSignedS3ObjectUrl(coverPhoto);
 }
 ---
 

@@ -9,11 +9,6 @@ const albums = defineCollection({
     remarks: z.string().optional(),
     pubDate: z.coerce.date(),
     location: z.string(),
-    photos: z.array(
-      z.object({
-        id: z.string(),
-      })
-    )
   })
 });
 
