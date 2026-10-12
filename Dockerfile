@@ -21,4 +21,4 @@ COPY --from=build /app/package.json ./package.json
 COPY --from=build /app/node_modules ./node_modules
 
 EXPOSE 4321
-CMD [ "pnpm", "run", "preview", "--", "--host" ]
+CMD [ "pnpm", "preview", "--host" ]
