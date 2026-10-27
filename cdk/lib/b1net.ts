@@ -11,6 +11,11 @@ export class B1NetStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props?: cdk.StackProps) {
     super(scope, id, props);
 
+    const githubToken = process.env.AMPLIFY_GITHUB_TOKEN;
+    if (!githubToken) {
+      throw new Error('Set AMPLIFY_GITHUB_TOKEN before synthesizing or deploying this stack.');
+    }
+
     const photosBucket = new s3.Bucket(this, "PhotosBucket", {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
@@ -26,7 +31,7 @@ export class B1NetStack extends cdk.Stack {
       },
     });
 
-    const app = new amplify.CfnApp(this, "WebApp", {
+    const app = new amplify.CfnApp(this, "B1NetWebApp", {
       name: "B1NetWeb",
       repository: "https://github.com/breadone/breadone.net",
       oauthToken: githubToken,
