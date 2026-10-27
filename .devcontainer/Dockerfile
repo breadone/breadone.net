@@ -4,7 +4,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 
 RUN apt update \
     && apt install -y --no-install-recommends \
-    && npm install -g aws-cdk@2.1133.0 \
+    && npm install -g aws-cdk@2.1146.1 \
     && rm -rf /var/lib/apt/lists/*
 
 RUN curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscli.zip \
