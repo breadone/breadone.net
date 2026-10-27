@@ -44,9 +44,39 @@ export class B1NetStack extends cdk.Stack {
     });
 
     const computeRole = new iam.Role(this, "AmplifyComputeRole", {
-      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
+      assumedBy: new iam.CompositePrincipal(
+        new iam.ServicePrincipal("amplify.amazonaws.com"),
+        new iam.ServicePrincipal("amplify.ap-southeast-2.amazonaws.com"),
+        new iam.ServicePrincipal("codebuild.amazonaws.com"),
+      ),
     });
     photosBucket.grantRead(computeRole);
+
+    const amplifyServiceRole = new iam.Role(this, "AmplifyServiceRole", {
+      assumedBy: new iam.CompositePrincipal(
+        new iam.ServicePrincipal("amplify.amazonaws.com"),
+        new iam.ServicePrincipal("amplify.ap-southeast-2.amazonaws.com"),
+        new iam.ServicePrincipal("codebuild.amazonaws.com"),
+      ),
+      description: "Allows AWS Amplify to operate the application.",
+    });
+    amplifyServiceRole.addToPolicy(
+      new iam.PolicyStatement({
+        actions: [
+          "logs:CreateLogStream",
+          "logs:CreateLogGroup",
+          "logs:DescribeLogGroups",
+          "logs:PutLogEvents",
+
+          "amplify:*",
+          "codebuild:CreateProject",
+          "codebuild:StartBuild",
+          "codebuild:BatchGetBuilds",
+          "iam:PassRole"
+        ],
+        resources: ["*"],
+      }),
+    );
 
     const app = new amplify.CfnApp(this, "B1NetWebApp", {
       name: "B1NetWeb",
@@ -54,6 +84,7 @@ export class B1NetStack extends cdk.Stack {
       accessToken: githubToken,
       platform: "WEB_COMPUTE",
       computeRoleArn: computeRole.roleArn,
+      iamServiceRole: amplifyServiceRole.roleArn,
       environmentVariables: [
         {
           name: "_CUSTOM_IMAGE",
@@ -83,6 +114,7 @@ frontend:
     new amplify.CfnBranch(this, `${amplifyBranchName}Branch`, {
       appId: app.attrAppId,
       branchName: amplifyBranchName,
+      enableAutoBuild: true,
       environmentVariables: [
         {
           name: "S3_BUCKET_NAME",
