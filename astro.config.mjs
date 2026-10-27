@@ -20,4 +20,20 @@ export default defineConfig({
   image: {
     domains: ["*amazonaws.com"],
   },
+
+  env: {
+    schema: {
+      S3_BUCKET_NAME: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: false
+      }),
+      
+      CLOUDFRONT_DOMAIN: envField.string({
+        context: 'server',
+        access: 'secret',
+        optional: false
+      }),
+    }
+  }
 });

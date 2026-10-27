@@ -7,29 +7,20 @@ const defaultRegion = "ap-southeast-2";
 let s3Client: S3Client | undefined;
 
 function getS3Client() {
-    if (!s3Client) {
-        s3Client = new S3Client({
-            defaultRegion
-        });
-    }
-
-    return s3Client;
+    return (s3Client ??= new s3Client({}));
 }
 
 export async function listAlbumObjectKeys(albumSlug: string) {
-
-    const bucketName = import.meta.env.S3_BUCKET_NAME
+    const bucketName = getSecret("S3_BUCKET_NAME")
     const s3Client = getS3Client();
-
     const keys: string[] = [];
     let continuationToken: string | undefined;
-    const prefix = `${albumSlug}/`;
 
     do {
         const response = await s3Client.send(
             new ListObjectsV2Command({
                 Bucket: bucketName,
-                Prefix: prefix,
+                Prefix: `${albumSlug}/`,
                 ContinuationToken: continuationToken,
             })
         );
@@ -43,42 +34,22 @@ export async function listAlbumObjectKeys(albumSlug: string) {
         continuationToken = response.IsTruncated ? response.NextContinuationToken : undefined;
     } while (continuationToken);
 
-    return keys.sort(sortS3KeysByFilename);
+    return keys.sort();
 }
 
-export async function getSignedS3ObjectUrl(key: string, expiresIn = 3600) {
-    const config = getS3Config();
+export async function listAlbumImageUrls(albumSlug: string) {
+    const keys = await listAlbumObjectKeys(albumSlug);
 
-    if (!config) {
-        throw new Error("S3 is not configured");
-    }
-
-    const { bucketName } = config;
-    const s3Client = getS3Client();
-
-    if (!s3Client) {
-        throw new Error("S3 is not configured");
-    }
-
-    return getSignedUrl(
-        s3Client,
-        new GetObjectCommand({
-            Bucket: bucketName,
-            Key: key,
-        }),
-        { expiresIn }
-    );
+    return keys.map(getImageUrl);
 }
 
-function sortS3KeysByFilename(leftKey: string, rightKey: string) {
-    const leftName = leftKey.split("/").pop() ?? leftKey;
-    const rightName = rightKey.split("/").pop() ?? rightKey;
-    const leftNumber = Number.parseInt(leftName, 10);
-    const rightNumber = Number.parseInt(rightName, 10);
+export function getImageUrl(key: string) {
+    const cdnDomain = getSecret("CLOUDFRONT_DOMAIN");
+    return `https://${cdnDomain}/${key}`;
+}
 
-    if (!Number.isNaN(leftNumber) && !Number.isNaN(rightNumber) && leftNumber !== rightNumber) {
-        return leftNumber - rightNumber;
-    }
+export async function getAlbumCoverUrl(albumSlug: string) {
+    const keys = await listAlbumObjectKeys(albumSlug);
 
-    return leftName.localeCompare(rightName, undefined, { numeric: true, sensitivity: "base" });
+    return getImageUrl(keys[0]);
 }
