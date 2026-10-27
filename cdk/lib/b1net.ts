@@ -1,4 +1,4 @@
-import * as cdk from 'aws-cdk-lib/core';
+import * as cdk from 'aws-cdk-lib';
 import { Construct } from 'constructs';
 import * as s3 from 'aws-cdk-lib/aws-s3'
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront'
@@ -20,8 +20,12 @@ export class B1NetStack extends cdk.Stack {
       blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
       encryption: s3.BucketEncryption.S3_MANAGED,
       enforceSSL: true,
+      versioned: true
     });
 
+    new cdk.CfnOutput(this, 'PhotosBucketName', {
+      value: photosBucket.bucketName
+    })
 
     const cdn = new cloudfront.Distribution(this, "PhotoCDN", {
       defaultBehavior: {
@@ -29,6 +33,10 @@ export class B1NetStack extends cdk.Stack {
           photosBucket
         ),
       },
+    });
+
+    new cdk.CfnOutput(this, "CDNUrl", {
+      value: `https://${cdn.distributionDomainName}`,
     });
 
     const app = new amplify.CfnApp(this, "B1NetWebApp", {
