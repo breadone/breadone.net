@@ -1,6 +1,5 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import { envField } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
 import awsAmplify from 'astro-aws-amplify';
@@ -15,10 +14,6 @@ export default defineConfig({
 
   adapter: awsAmplify(),
 
-  image: {
-    domains: ["*amazonaws.com"],
-  },
-
   env: {
     schema: {
       S3_BUCKET_NAME: envField.string({
@@ -26,7 +21,7 @@ export default defineConfig({
         access: 'secret',
         optional: false
       }),
-      
+
       CLOUDFRONT_DOMAIN: envField.string({
         context: 'server',
         access: 'secret',
