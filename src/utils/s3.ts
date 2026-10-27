@@ -3,40 +3,13 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { getSecret } from "astro:env/server";
 
 const defaultRegion = "ap-southeast-2";
-// const requiredConfigKeys = ["S3_BUCKET_NAME", "AWS_ACCESS_KEY_ID", "AWS_SECRET_ACCESS_KEY"] as const;
 
 let s3Client: S3Client | undefined;
 
-function getS3Config() {
-    const bucketName = getSecret("S3_BUCKET_NAME");
-    const accessKeyId = getSecret("AWS_ACCESS_KEY_ID");
-    const secretAccessKey = getSecret("AWS_SECRET_ACCESS_KEY");
-    const region = getSecret("AWS_REGION") || defaultRegion;
-
-    return {
-        bucketName,
-        region,
-        accessKeyId,
-        secretAccessKey,
-    };
-}
-
 function getS3Client() {
     if (!s3Client) {
-        const config = getS3Config();
-
-        if (!config) {
-            return undefined;
-        }
-
-        const { region, accessKeyId, secretAccessKey } = config;
-
         s3Client = new S3Client({
-            region,
-            credentials: {
-                accessKeyId,
-                secretAccessKey,
-            },
+            defaultRegion
         });
     }
 
@@ -44,18 +17,9 @@ function getS3Client() {
 }
 
 export async function listAlbumObjectKeys(albumSlug: string) {
-    const config = getS3Config();
 
-    if (!config) {
-        return [];
-    }
-
-    const { bucketName } = config;
+    const bucketName = import.meta.env.S3_BUCKET_NAME
     const s3Client = getS3Client();
-
-    if (!s3Client) {
-        return [];
-    }
 
     const keys: string[] = [];
     let continuationToken: string | undefined;

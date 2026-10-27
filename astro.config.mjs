@@ -20,32 +20,4 @@ export default defineConfig({
   image: {
     domains: ["*amazonaws.com"],
   },
-
-  env: {
-    schema: {
-      AWS_ACCESS_KEY_ID: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: false
-      }),
-
-      AWS_SECRET_ACCESS_KEY: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: false
-      }),
-
-      S3_BUCKET_NAME: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: false
-      }),
-
-      AWS_REGION: envField.string({
-        context: 'server',
-        access: 'secret', // not actually but it allows runtime access
-        optional: false
-      }),
-    }
-  }
 });

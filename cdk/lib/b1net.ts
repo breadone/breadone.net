@@ -48,6 +48,12 @@ export class B1NetStack extends cdk.Stack {
     new amplify.CfnBranch(this, "MainBranch", {
       appId: app.attrAppId,
       branchName: "main",
+      environmentVariables: [
+        {
+          name: "S3_BUCKET_NAME",
+          value: photosBucket.bucketName,
+        },
+      ],
     });
 
     const computeRole = new iam.Role(this, "AmplifyComputeRole", {
