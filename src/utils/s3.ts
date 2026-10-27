@@ -7,7 +7,7 @@ const defaultRegion = "ap-southeast-2";
 let s3Client: S3Client | undefined;
 
 function getS3Client() {
-    return (s3Client ??= new s3Client({}));
+    return (s3Client ??= new S3Client({}));
 }
 
 export async function listAlbumObjectKeys(albumSlug: string) {
