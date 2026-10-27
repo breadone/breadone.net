@@ -45,9 +45,24 @@ export class B1NetStack extends cdk.Stack {
       oauthToken: githubToken,
     });
 
-    new amplify.CfnBranch(this, "MainBranch", {
+    // new amplify.CfnBranch(this, "MainBranch", {
+    //   appId: app.attrAppId,
+    //   branchName: "main",
+    //   environmentVariables: [
+    //     {
+    //       name: "S3_BUCKET_NAME",
+    //       value: photosBucket.bucketName,
+    //     },
+    //     {
+    //       name: "CLOUDFRONT_DOMAIN",
+    //       value: cdn.distributionDomainName
+    //     }
+    //   ],
+    // });
+    
+    new amplify.CfnBranch(this, "PreviewBranch", {
       appId: app.attrAppId,
-      branchName: "main",
+      branchName: "preview-environment",
       environmentVariables: [
         {
           name: "S3_BUCKET_NAME",
