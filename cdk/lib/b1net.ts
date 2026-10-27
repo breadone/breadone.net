@@ -44,52 +44,46 @@ export class B1NetStack extends cdk.Stack {
     });
 
     const computeRole = new iam.Role(this, "AmplifyComputeRole", {
-      assumedBy: new iam.CompositePrincipal(
-        new iam.ServicePrincipal("amplify.amazonaws.com"),
-        new iam.ServicePrincipal("amplify.ap-southeast-2.amazonaws.com"),
-        new iam.ServicePrincipal("codebuild.amazonaws.com"),
-      ),
+      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
     });
     photosBucket.grantRead(computeRole);
 
     const amplifyServiceRole = new iam.Role(this, "AmplifyServiceRole", {
-      assumedBy: new iam.CompositePrincipal(
-        new iam.ServicePrincipal("amplify.amazonaws.com"),
-        new iam.ServicePrincipal("amplify.ap-southeast-2.amazonaws.com"),
-        new iam.ServicePrincipal("codebuild.amazonaws.com"),
-      ),
+      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
       description: "Allows AWS Amplify to operate the application.",
     });
-    amplifyServiceRole.addToPolicy(
-      new iam.PolicyStatement({
-        actions: [
-          "logs:CreateLogStream",
-          "logs:CreateLogGroup",
-          "logs:DescribeLogGroups",
-          "logs:PutLogEvents",
 
-          "amplify:*",
-          "codebuild:CreateProject",
-          "codebuild:StartBuild",
-          "codebuild:BatchGetBuilds",
-          "iam:PassRole"
-        ],
-        resources: ["*"],
-      }),
-    );
+    amplifyServiceRole.addManagedPolicy(
+      iam.ManagedPolicy.fromAwsManagedPolicyName(
+        "AdministratorAccess-Amplify"
+      )
+    )
+
+    // amplifyServiceRole.addToPolicy(
+    //   new iam.PolicyStatement({
+    //     actions: [
+    //       "logs:CreateLogStream",
+    //       "logs:CreateLogGroup",
+    //       "logs:DescribeLogGroups",
+    //       "logs:PutLogEvents",
+
+    //       "amplify:*",
+    //       "codebuild:CreateProject",
+    //       "codebuild:StartBuild",
+    //       "codebuild:BatchGetBuilds",
+    //       "iam:PassRole"
+    //     ],
+    //     resources: ["*"],
+    //   }),
+    // );
 
     const app = new amplify.CfnApp(this, "B1NetWebApp", {
       name: "B1NetWeb",
       repository: "https://github.com/breadone/breadone.net",
       accessToken: githubToken,
       platform: "WEB_COMPUTE",
-      computeRoleArn: computeRole.roleArn,
       iamServiceRole: amplifyServiceRole.roleArn,
       environmentVariables: [
-        {
-          name: "_CUSTOM_IMAGE",
-          value: "amplify:al2023",
-        },
       ],
       buildSpec: `version: 1
 frontend:
