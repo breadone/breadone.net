@@ -7,10 +7,7 @@ RUN apt update \
     && npm install -g aws-cdk@2.1146.1 \
     && rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o /tmp/awscli.zip \
-    && unzip /tmp/awscli.zip -d /tmp \
-    && /tmp/aws/install \
-    && rm -rf /tmp/aws /tmp/awscli.zip
+RUN curl -fsSL https://awscli.amazonaws.com/v2/install.sh | bash && export PATH=/home/node/.local/bin:$PATH
 
 LABEL devcontainer.metadata='[{ \
     "mounts": [ \
