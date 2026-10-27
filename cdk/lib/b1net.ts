@@ -43,10 +43,17 @@ export class B1NetStack extends cdk.Stack {
       value: `https://${cdn.distributionDomainName}`,
     });
 
+    const computeRole = new iam.Role(this, "AmplifyComputeRole", {
+      assumedBy: new iam.ServicePrincipal("amplify.amazonaws.com"),
+    });
+    photosBucket.grantRead(computeRole);
+
     const app = new amplify.CfnApp(this, "B1NetWebApp", {
       name: "B1NetWeb",
       repository: "https://github.com/breadone/breadone.net",
       oauthToken: githubToken,
+      platform: "WEB_COMPUTE",
+      computeRoleArn: computeRole.roleArn,
     });
 
     new amplify.CfnBranch(this, `${amplifyBranchName}Branch`, {
@@ -59,17 +66,9 @@ export class B1NetStack extends cdk.Stack {
         },
         {
           name: "CLOUDFRONT_DOMAIN",
-          value: cdn.distributionDomainName
+          value: cdn.distributionDomainName,
         }
       ],
     });
-
-    const computeRole = new iam.Role(this, "AmplifyComputeRole", {
-      assumedBy: new iam.ServicePrincipal(
-        "amplify.amazonaws.com"
-      ),
-    });
-    photosBucket.grantRead(computeRole)
-
   }
 }

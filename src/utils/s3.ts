@@ -10,24 +10,24 @@ function getS3Client() {
 }
 
 export async function listAlbumObjectKeys(albumSlug: string) {
-    const bucketName = getSecret("S3_BUCKET_NAME")
-    const s3Client = getS3Client();
+    const bucketName = getSecret("S3_BUCKET_NAME");
+    const client = getS3Client();
 
-    try {
-        const response = await s3Client.send(
-            new ListObjectsV2Command({
-                Bucket: bucketName,
-                Prefix: `${albumSlug}/`,
-            }),
-        );
-
-        return (response.Contents!)
-            .map((object) => object.Key)
-            .filter((key): key is string => !!key) // ensure keys are strings
-            .sort();
-    } catch {
-        return ['could not read album!']
+    if (!bucketName) {
+        throw new Error("S3_BUCKET_NAME is not configured.");
     }
+
+    const response = await client.send(
+        new ListObjectsV2Command({
+            Bucket: bucketName,
+            Prefix: `${albumSlug}/`,
+        }),
+    );
+
+    return (response.Contents ?? [])
+        .map((object) => object.Key)
+        .filter((key): key is string => Boolean(key))
+        .sort();
 }
 
 export async function listAlbumImageUrls(albumSlug: string) {
@@ -44,5 +44,5 @@ export function getImageUrl(key: string) {
 export async function getAlbumCoverUrl(albumSlug: string) {
     const keys = await listAlbumObjectKeys(albumSlug);
 
-    return getImageUrl(keys[0]);
+    return keys[0] ? getImageUrl(keys[0]) : undefined;
 }
