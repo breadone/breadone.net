@@ -51,7 +51,7 @@ export class B1NetStack extends cdk.Stack {
     const app = new amplify.CfnApp(this, "B1NetWebApp", {
       name: "B1NetWeb",
       repository: "https://github.com/breadone/breadone.net",
-      oauthToken: githubToken,
+      accessToken: githubToken,
       platform: "WEB_COMPUTE",
       computeRoleArn: computeRole.roleArn,
       environmentVariables: [
