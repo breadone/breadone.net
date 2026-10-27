@@ -54,6 +54,30 @@ export class B1NetStack extends cdk.Stack {
       oauthToken: githubToken,
       platform: "WEB_COMPUTE",
       computeRoleArn: computeRole.roleArn,
+      environmentVariables: [
+        {
+          name: "_CUSTOM_IMAGE",
+          value: "amplify:al2023",
+        },
+      ],
+      buildSpec: `version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - npm i -g pnpm
+        - pnpm config set store-dir .pnpm-store
+        - pnpm install --frozen-lockfile
+    build:
+      commands:
+        - pnpm run build
+  artifacts:
+    baseDirectory: .amplify-hosting
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - .pnpm-store/**/*`,
     });
 
     new amplify.CfnBranch(this, `${amplifyBranchName}Branch`, {
