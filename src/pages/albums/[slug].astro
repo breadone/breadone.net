@@ -2,8 +2,7 @@
 import Base from "@layout/Base";
 import { getFormattedDate } from "@utils/date";
 import { getEntry, render } from "astro:content";
-import { Image } from "astro:assets";
-import { getSignedS3ObjectUrl, listAlbumObjectKeys } from "@utils/s3";
+import { listAlbumImageUrls } from "@utils/s3";
 
 export const prerender = false;
 const { slug } = Astro.params;
@@ -18,13 +17,8 @@ if (!album) {
   return Astro.redirect("/404");
 }
 
-const photoKeys = await listAlbumObjectKeys(album.id);
-
-const images = await Promise.all(
-  photoKeys.map((photoKey) => getSignedS3ObjectUrl(photoKey)),
-);
-
-const ogImage = images.length > 0 ? images[0] : undefined;
+const images = await listAlbumImageUrls(album.id);
+const ogImage = images[0];
 
 const description = album.data.remarks ?? album.data.title;
 const Content = (await render(album)).Content;
@@ -38,19 +32,18 @@ const Content = (await render(album)).Content;
     </p>
     <p>{album.data.location}</p><br />
 
-    {Content ? <Content /> : description && <p>{description}</p>}
+    <Content />
   </div>
 
   <div slot="content">
     {
       images.map((img) => (
-        <Image
+        <img
           class="pb-2 w-full h-auto"
           src={img}
           alt={`${album.data.title} photograph`}
-          width={1200}
-          height={800}
-          format="jpg"
+          loading="lazy"
+          decoding="async"
         />
       ))
     }
