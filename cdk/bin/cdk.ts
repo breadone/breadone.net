@@ -2,6 +2,18 @@
 import * as cdk from 'aws-cdk-lib/core';
 import { B1NetStack } from '../lib/b1net';
 
-const app = new cdk.App();
+const config = {
+  dev: { amplifyBranchName: 'preview-environment' },
+  prod: { amplifyBranchName: 'main' },
+} as const;
 
-new B1NetStack(app, `b1net-${process.env.ENVIRONMENT}`);
+const app = new cdk.App();
+const environment = process.env.ENVIRONMENT;
+
+if (environment !== 'dev' && environment !== 'prod') {
+  throw new Error('ENVIRONMENT must be "dev" or "prod"');
+}
+
+new B1NetStack(app, `b1net-${environment}`, {
+  amplifyBranchName: config[environment].amplifyBranchName,
+});

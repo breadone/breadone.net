@@ -6,10 +6,14 @@ import * as origins from 'aws-cdk-lib/aws-cloudfront-origins'
 import * as amplify from 'aws-cdk-lib/aws-amplify'
 import * as iam from 'aws-cdk-lib/aws-iam'
 
+interface B1NetStackProps extends cdk.StackProps {
+  amplifyBranchName: string;
+}
 
 export class B1NetStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
-    super(scope, id, props);
+  constructor(scope: Construct, id: string, props: B1NetStackProps) {
+    const { amplifyBranchName, ...stackProps } = props;
+    super(scope, id, stackProps);
 
     const githubToken = process.env.AMPLIFY_GITHUB_TOKEN;
     if (!githubToken) {
@@ -45,24 +49,9 @@ export class B1NetStack extends cdk.Stack {
       oauthToken: githubToken,
     });
 
-    // new amplify.CfnBranch(this, "MainBranch", {
-    //   appId: app.attrAppId,
-    //   branchName: "main",
-    //   environmentVariables: [
-    //     {
-    //       name: "S3_BUCKET_NAME",
-    //       value: photosBucket.bucketName,
-    //     },
-    //     {
-    //       name: "CLOUDFRONT_DOMAIN",
-    //       value: cdn.distributionDomainName
-    //     }
-    //   ],
-    // });
-    
-    new amplify.CfnBranch(this, "PreviewBranch", {
+    new amplify.CfnBranch(this, `${amplifyBranchName}Branch`, {
       appId: app.attrAppId,
-      branchName: "preview-environment",
+      branchName: amplifyBranchName,
       environmentVariables: [
         {
           name: "S3_BUCKET_NAME",
@@ -82,9 +71,5 @@ export class B1NetStack extends cdk.Stack {
     });
     photosBucket.grantRead(computeRole)
 
-
-
   }
-
-  
 }
