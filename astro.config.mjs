@@ -3,7 +3,7 @@ import { defineConfig } from "astro/config";
 import { envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
-import node from "@astrojs/node";
+import awsAmplify from 'astro-aws-amplify';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,9 +13,7 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: node({
-    mode: "standalone",
-  }),
+  adapter: awsAmplify(),
 
   image: {
     domains: ["*amazonaws.com"],
