@@ -53,6 +53,10 @@ export class B1NetStack extends cdk.Stack {
           name: "S3_BUCKET_NAME",
           value: photosBucket.bucketName,
         },
+        {
+          name: "CLOUDFRONT_DOMAIN",
+          value: cdn.distributionDomainName
+        }
       ],
     });
 
