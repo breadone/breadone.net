@@ -1,12 +1,10 @@
 ---
 import Base from "src/layout/Base.astro";
-import AlbumCard from "@components/albums/albumCard"; // Ensure path matches .astro suffix
+import AlbumCard from "@components/albums/albumCard";
 import { getCollection } from "astro:content";
 
-// 1. Fetch your S3-connected albums from content collections
 const albums = await getCollection("albums");
 
-// 2. Sort albums by publication date descending (newest first)
 albums.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
 export const prerender = false;

@@ -1,9 +1,8 @@
 // @ts-check
-import { defineConfig } from "astro/config";
-import { envField } from "astro/config";
+import { defineConfig, envField } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 
-import node from "@astrojs/node";
+import awsAmplify from 'astro-aws-amplify';
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,37 +12,19 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: node({
-    mode: "standalone",
-  }),
-
-  image: {
-    domains: ["*amazonaws.com"],
-  },
+  adapter: awsAmplify(),
 
   env: {
     schema: {
-      AWS_ACCESS_KEY_ID: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: false
-      }),
-
-      AWS_SECRET_ACCESS_KEY: envField.string({
-        context: 'server',
-        access: 'secret',
-        optional: false
-      }),
-
       S3_BUCKET_NAME: envField.string({
         context: 'server',
         access: 'secret',
         optional: false
       }),
 
-      AWS_REGION: envField.string({
+      CLOUDFRONT_DOMAIN: envField.string({
         context: 'server',
-        access: 'secret', // not actually but it allows runtime access
+        access: 'secret',
         optional: false
       }),
     }
