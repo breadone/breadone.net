@@ -59,13 +59,6 @@ const Content = (await render(album)).Content;
       class="album-lightbox"
       aria-label={`${album.data.title} photograph`}
     >
-      <button
-        class="album-lightbox-close"
-        type="button"
-        aria-label="Close image"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
       <img class="album-lightbox-image" alt="" />
     </dialog>
   </div>
@@ -76,9 +69,7 @@ const Content = (await render(album)).Content;
   const lightboxImage = lightbox?.querySelector<HTMLImageElement>(
     ".album-lightbox-image",
   );
-  const closeButton = lightbox?.querySelector<HTMLButtonElement>(
-    ".album-lightbox-close",
-  );
+
   const desktopViewport = window.matchMedia("(min-width: 48rem)");
 
   document.addEventListener("click", (event) => {
@@ -97,8 +88,6 @@ const Content = (await render(album)).Content;
     lightboxImage.alt = image.alt;
     lightbox.showModal();
   });
-
-  closeButton?.addEventListener("click", () => lightbox?.close());
 
   lightbox?.addEventListener("click", (event) => {
     if (event.target === lightbox) lightbox.close();
@@ -164,7 +153,7 @@ const Content = (await render(album)).Content;
     backdrop-filter: blur(6px);
     opacity: 0;
     transition:
-      opacity 220ms ease,
+      opacity 5000ms ease,
       display 220ms allow-discrete,
       overlay 220ms allow-discrete;
   }
@@ -179,23 +168,6 @@ const Content = (await render(album)).Content;
     max-height: 80vh;
     object-fit: contain;
     box-shadow: 0 1rem 3rem rgb(0 0 0 / 35%);
-  }
-
-  .album-lightbox-close {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    display: grid;
-    width: 2.25rem;
-    height: 2.25rem;
-    place-items: center;
-    border: 0;
-    border-radius: 9999px;
-    background: white;
-    color: black;
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
   }
 
   @media (min-width: 48rem) {
