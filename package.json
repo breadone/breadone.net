@@ -15,6 +15,7 @@
     "@aws-sdk/s3-request-presigner": "^3.1149.0",
     "@tailwindcss/vite": "^4.3.3",
     "astro": "^7.3.8",
+    "astro-aws-amplify": "^0.6.0",
     "gray-matter": "^4.0.3",
     "pocketbase": "^0.26.9",
     "swiper": "^12.2.0",
