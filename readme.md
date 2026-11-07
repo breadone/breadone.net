@@ -1,5 +1,7 @@
 # breadone.net
 
-My personal website, built on [Astro](https://astro.build/), exciting new V3 version that's largely the same visually, but under the hood a LOT more efficient, scalable, and self-hostable.
+Really just a photography portfolio website, used to have more content but I wanted to make it more focused.
 
-It's still in a lot of flux, as I'm still rethinking a lot of processes for all the content I've been putting on it. I'm happy (enough) with how it is now though, so it's hopefully a fun enough look.
+Built on Astro and Tailwind, entirely custom theme. Deployed on AWS Amplify with S3 as the photo storage and Cloudfront as a CDN. All handled with CDK in the `cdk` folder. 
+
+Two environments currently, `https://breadone.net` pointing to `main` and `https://preview.breadone.net` pointing to `preview-environment`. 
