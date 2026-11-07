@@ -26,7 +26,7 @@ export async function listAlbumObjectKeys(albumSlug: string) {
 
     return (response.Contents ?? [])
         .map((object) => object.Key)
-        .filter((key): key is string => Boolean(key))
+        .filter((key): key is string => key !== undefined && key.length > 0 && !key.endsWith("/"))
         .sort();
 }
 
@@ -38,7 +38,8 @@ export async function listAlbumImageUrls(albumSlug: string) {
 
 export function getImageUrl(key: string) {
     const cdnDomain = getSecret("CLOUDFRONT_DOMAIN");
-    return `https://${cdnDomain}/${key}`;
+    const encodedKey = key.split("/").map(encodeURIComponent).join("/");
+    return `https://${cdnDomain}/${encodedKey}`;
 }
 
 export async function getAlbumCoverUrl(albumSlug: string) {
