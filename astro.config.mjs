@@ -12,7 +12,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: awsAmplify(),
+  adapter: awsAmplify({
+    runtimeEnv: ["S3_BUCKET_NAME", "CLOUDFRONT_DOMAIN"],
+  }),
   output: "server",
 
   env: {

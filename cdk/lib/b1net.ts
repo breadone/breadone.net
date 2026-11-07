@@ -82,6 +82,7 @@ export class B1NetStack extends cdk.Stack {
       repository: "https://github.com/breadone/breadone.net",
       accessToken: githubToken,
       platform: "WEB_COMPUTE",
+      computeRoleArn: computeRole.roleArn,
       iamServiceRole: amplifyServiceRole.roleArn,
       environmentVariables: [
       ],
