@@ -13,6 +13,7 @@ export default defineConfig({
   },
 
   adapter: awsAmplify(),
+  output: "server",
 
   env: {
     schema: {
